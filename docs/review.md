@@ -28,7 +28,7 @@ The relevance of the subsequent steps may depend on how far the reviewee got wit
 
 # Step 2: Structure and Supporting files
 
-## Installation Instructions should be in README
+## OK : Installation Instructions should be in README
 
 Particularly now that we have a database involved, it becomes even more important to ensure that correct installation instructions are included in your readme so that other developers (and yourself in the future) know how to get set up with the application, e.g.
 
@@ -62,6 +62,7 @@ Always leave a space to check over your pull request before submission.  Please 
 * unnecessary files
 * indentation
 
+####ok done
 For example if you've been using the [launchy gem](https://github.com/copiousfreetime/launchy) to `save_and_open_page` then you'll have a load of `capybara-<TIMESTAMP>.html` files in your root directory that you don't want committed to git.  Try updating `.gitignore` like so:
 
 
@@ -100,7 +101,7 @@ end
 
 Clearly these tasks can be run directly from an irb console, but the Rakefile makes it simpler to run common tasks as part of deployment to Heroku and Continuous Integration (C.I.) and other situations where your code runs remotely.
 
-## Gemfile should Use Test Groups
+## ok done Gemfile should Use Test Groups
 
 Ensure that all test related gems are in test group, e.g. capybara etc.
 
@@ -130,7 +131,7 @@ end
 
 See http://bundler.io/groups.html for more details
 
-## Ensure spec_helper.rb is Configured Correctly
+## ok done Ensure spec_helper.rb is Configured Correctly
 
 Make sure that your spec_helper pulls in a single app file that requires all the other dependencies required by the app.  Don't pull in the models etc. separately in the spec helper or you risk having the tests pass when the app might be missing a dependency.
 
@@ -251,11 +252,11 @@ end
 ```
 
 
-## Ensure Correct Location of Feature/Acceptance and Unit Tests
+## ok DOne Ensure Correct Location of Feature/Acceptance and Unit Tests
 
 All your acceptance tests should be in a separate folder called `features`.  This can be in your `spec` folder or on the root; up to you.  It depends if you want the convenience of running units and features together or the convenience of being able to run them separately (helpful if feature tests run very slowly).
 
-If a test is in the feature folder it should be testing the entire stack, i.e. it should interact with the app via a web page, and then test the results of that action in the web page that gets returned.  It's acceptable to manipulate the database directly to set things up, but note their are risks associated here, i.e. that you will get your database in a state that it couldn't get into via the web interface, then when the tests pass it may not reflect precisely the user experience of using the site.
+If a test is in the feature folder it should be testing the entire stack, i.e. it should interact with the app via a web page, and then test the results of that action in the web page that gets returned.  It's acceptable to manipulate the database directly to set things up, but note there are risks associated here, i.e. that you will get your database in a state that it couldn't get into via the web interface, then when the tests pass it may not reflect precisely the user experience of using the site.
 
 Conversely if you are testing your models, with or without database interactions, then these tests should NOT be in your feature folder and should be in the `spec` folder, or in `spec/models`
 
