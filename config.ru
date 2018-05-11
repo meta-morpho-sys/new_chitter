@@ -6,4 +6,4 @@ require_relative 'app'
 
 use Rack::MethodOverride
 
-run App
+run Chitter
