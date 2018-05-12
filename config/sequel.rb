@@ -2,4 +2,4 @@
 
 require 'sequel'
 
-DB = Sequel.sqlite("./db/#{ENV.fetch('RACK_ENV', 'development')}.db")
+ENV['DATABASE_URL'] ||= "./db/#{ENV.fetch('RACK_ENV', 'development')}.db"
