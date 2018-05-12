@@ -6,5 +6,9 @@ class Chitter < Sinatra::Base
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(20) }
   register Sinatra::Flash
 
+  get '/' do
+    'lets start'
+  end
+
   run! if app_file == $PROGRAM_NAME
 end
