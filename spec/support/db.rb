@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+Rake.application.load_rakefile
+
 RSpec.configure do |c|
   c.before(:suite) do
-    Sequel.extension :migration
-    Sequel::Migrator.run(DB, 'db/migrations')
+    p 'Cleaning databases'
+    Rake::Task['db:create'].execute
     DB[:users].truncate
   end
 end
