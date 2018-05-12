@@ -7,14 +7,6 @@ Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 # require our Sinatra app file
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
-Rake.application.load_rakefile
-
-RSpec.configure do |config|
-  config.before(:each) do
-    Rake::Task['db:test_db_setup'].execute
-  end
-end
-
 RSpec.configure do |config|
   config.order = :random
 end
