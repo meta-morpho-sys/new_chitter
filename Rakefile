@@ -23,12 +23,20 @@ namespace :db do
   end
 
   task :teardown do
+    puts "*** Deleting database files ***.\n\n"
+    puts "    Press 'y' to confirm you want to delete the Chitter database.\n\n"
+    puts '*** Attention! All data will be lost! ***'
+    print '>>'
+
+    confirm = STDIN.gets.chomp.downcase
+    return unless confirm == 'y'
+
     db_url = ENV['DATABASE_URL']
     begin
       FileUtils.remove(db_url)
       puts "Sqlite3 database file #{db_url} deleted."
     rescue Errno::ENOENT
-      puts 'No such database'
+      puts 'No such database file'
     end
   end
 end
