@@ -15,7 +15,6 @@ group :test do
 end
 
 gem 'bcrypt'
-gem 'pg'
 gem 'pry'
 gem 'rake'
 gem 'rubocop'
