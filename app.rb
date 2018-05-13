@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'sinatra'
+require 'sinatra/flash'
+require './db/sequel_setup'
+
 # Controller
 class Chitter < Sinatra::Base
   enable :sessions

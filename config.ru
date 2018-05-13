@@ -2,7 +2,7 @@
 
 Bundler.require(:default)
 
-require_relative 'app'
+require_relative './app'
 
 use Rack::MethodOverride
 
