@@ -1,3 +1,7 @@
 language: ruby
 rvm:
  - 2.4.1
+
+ env:
+ - DB=sqilte3
+ - RACK_ENV=development
