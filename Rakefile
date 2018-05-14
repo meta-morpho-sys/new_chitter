@@ -35,7 +35,7 @@ namespace :db do
       FileUtils.remove(db_url)
       puts "Sqlite3 database file #{db_url} deleted."
     rescue Errno::ENOENT
-      puts 'No such database file'
+      puts 'No such database file.'
     end
   end
 end
