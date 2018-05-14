@@ -10,8 +10,22 @@ class Chitter < Sinatra::Base
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(20) }
   register Sinatra::Flash
 
+  # <editor-fold desc="HOME">
   get '/' do
-    'lets start'
+    redirect 'login/home'
+  end
+
+  get '/login/home' do
+    erb :home
+  end
+  # </editor-fold>
+
+  get '/login/users/new/' do
+    erb :'users/new'
+  end
+
+  post '/login/users' do
+    'Welcome, test@example.com'
   end
 
   run! if app_file == $PROGRAM_NAME
