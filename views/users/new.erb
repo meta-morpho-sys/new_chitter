@@ -25,14 +25,14 @@
   <fieldset>
     <legend>Login Details</legend>
     <div>
-      <label for="user-name">Username:</label>
+      <label for="user_name">Username:</label>
       <input name="email" type="email" placeholder="Your username is your email address" required autofocus>
     </div>
 
     <div>
       <label for="password">Password:</label>
       <input type="button" onclick="showPswd()" value="Show/Hide">
-      <input name="password" type="password" placeholder="6 digits, a combination of numbers and letters" required>
+      <input id="pswdInput" name="password" type="password" placeholder="6 digits, a combination of numbers and letters" required>
     </div>
     <div>
       <input name="login" type="submit" value="Sign up">
