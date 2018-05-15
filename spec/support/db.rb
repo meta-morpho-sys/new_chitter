@@ -4,7 +4,7 @@ Rake.application.load_rakefile
 
 RSpec.configure do |c|
   c.before(:suite) do
-    p 'Cleaning databases'
+    puts 'Cleaning databases.'
     Rake::Task['db:create'].execute
     DB[:users].truncate
   end
