@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/flash'
 require './db/sequel_setup'
+require_relative './lib/flash_msgs'
 
 # Controller
 class Chitter < Sinatra::Base
@@ -25,7 +26,14 @@ class Chitter < Sinatra::Base
   end
 
   post '/login/users' do
-    'Welcome, test@example.com'
+    begin
+      user = User.create(params[:email], params[:password])
+      session[:user_id] = user.id
+    rescue Sequel::UniqueConstraintViolation
+      flash[:error] = FlashMsgs::DUPLICATE_EMAIL
+      redirect '/login/users/new/'
+    end
+    redirect "user/#{user.id}/peeps"
   end
 
   run! if app_file == $PROGRAM_NAME

@@ -12,7 +12,7 @@ describe User do
 
     it "hashes user's password" do
       expect(BCrypt::Password).to receive(:create).with('pswd123').and_return 'hashwithsalt'
-      User.create 'test@example.com', 'pswd123'
+      User.create 'test_2@example.com', 'pswd123'
     end
   end
 end

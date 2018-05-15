@@ -6,10 +6,10 @@ feature 'Registration' do
     visit '/'
     click_link 'Sign up'
 
-    fill_in('email', with: 'test@example.com')
+    fill_in('email', with: 'test_1@example.com')
     fill_in('password', with: 'password123')
     click_button 'Sign up'
 
-    expect(page).to have_content 'Welcome, test@example.com'
+    expect(page).to have_content 'Welcome, test_1@example.com'
   end
 end
