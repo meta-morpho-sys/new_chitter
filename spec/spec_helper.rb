@@ -7,8 +7,13 @@ Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 # require our Sinatra app file
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
+
 RSpec.configure do |config|
   config.order = :random
+  # Global require of 'support/db' when tests touch our DB.
+  config.when_first_matching_example_defined(:db) do
+    require_relative 'support/db'
+  end
 end
 
 # Setting up driver to communicate with HTML forms with  RESTful routes.
