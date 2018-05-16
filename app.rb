@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/flash'
 require './db/sequel_setup'
+require_relative './models/user'
 require_relative './lib/flash_msgs'
 
 # Controller
@@ -21,6 +22,7 @@ class Chitter < Sinatra::Base
   end
   # </editor-fold>
 
+  # <editor-fold desc="USER">
   get '/login/users/new/' do
     erb :'users/new'
   end
@@ -34,6 +36,13 @@ class Chitter < Sinatra::Base
       redirect '/login/users/new/'
     end
     redirect "user/#{user.id}/peeps"
+  end
+  # </editor-fold>
+
+  get '/user/:id/peeps' do
+    p params
+    @user = User.find params[:id]
+    erb :'peeps/index'
   end
 
   run! if app_file == $PROGRAM_NAME

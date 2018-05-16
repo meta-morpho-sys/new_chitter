@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-feature 'Registration' do
+feature 'Registration', :db do
 
   scenario 'a user can sign up' do
     visit '/'
