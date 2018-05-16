@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 require_relative '../../../models/user'
-require_relative '../../support/db'
 
-describe User, :db do
+describe User, :aggregate_failures, :db do
   describe '.create' do
     it 'adds a new user ' do
       user = User.create 'test@example.com', 'pswd123'
@@ -26,6 +25,11 @@ describe User, :db do
     context 'when the user lacks an id' do
       it 'returns nil if no ID is given' do
         expect(User.find(nil)).to eq nil
+      end
+
+      it 'warns when user ID is not found' do
+        non_existing_id = 2
+        expect { User.find(non_existing_id) }.to raise_error 'User not found'
       end
     end
   end

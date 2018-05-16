@@ -19,7 +19,8 @@ class User
 
   def self.find(user_id)
     return nil unless user_id
-    u = DB[:users].where(id: user_id).first
+    u = DB[:users] .where(id: user_id).first
+    raise 'User not found' if u.nil?
     User.new u
   end
 
