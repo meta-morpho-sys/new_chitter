@@ -8,4 +8,8 @@ RSpec.configure do |c|
     Rake::Task['db:create'].execute
     DB[:users].truncate
   end
+  c.around(:example, :db) do |example|
+    puts 'Rolling back transaction'
+    DB.transaction(rollback: :always) { example.run }
+  end
 end
