@@ -3,7 +3,7 @@
 require_relative '../../../models/user'
 require_relative '../../support/db'
 
-describe User do
+describe User, :db do
   describe '.create' do
     it 'adds a new user ' do
       user = User.create 'test@example.com', 'pswd123'
@@ -17,9 +17,16 @@ describe User do
   end
 
   describe '.find' do
-    it 'a specific user with given ID' do
+    let(:user) { User.create 'test_find@example.com', 'pswd123' }
+
+    example 'a specific user with given ID' do
       user = User.create 'test_find@example.com', 'pswd123'
       expect(User.find(user.id)).to eq user
+    end
+    context 'when the user lacks an id' do
+      it 'returns nil if no ID is given' do
+        expect(User.find(nil)).to eq nil
+      end
     end
   end
 

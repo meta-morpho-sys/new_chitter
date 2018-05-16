@@ -6,11 +6,6 @@ require 'bcrypt'
 class User
   attr_reader :id, :email
 
-  # def initialize(id, email)
-  #   @id = id
-  #   @email = email
-  # end
-  #
   def initialize(id = nil, email = nil, **kwargs)
     @id = id || kwargs[:id]
     @email = email || kwargs[:email]
@@ -23,6 +18,7 @@ class User
   end
 
   def self.find(user_id)
+    return nil unless user_id
     u = DB[:users].where(id: user_id).first
     User.new u
   end
@@ -30,6 +26,5 @@ class User
   def ==(other)
     @id == other.id && @email == other.email
   end
-
 end
 
