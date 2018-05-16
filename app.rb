@@ -29,7 +29,7 @@ class Chitter < Sinatra::Base
 
   post '/login/users' do
     begin
-      user = User.create(params[:email], params[:password])
+      user = User.create(params[:name], params[:email], params[:password])
       session[:user_id] = user.id
     rescue Sequel::UniqueConstraintViolation
       flash[:error] = FlashMsgs::DUPLICATE_EMAIL
@@ -40,7 +40,6 @@ class Chitter < Sinatra::Base
   # </editor-fold>
 
   get '/user/:id/peeps' do
-    p params
     @user = User.find params[:id]
     erb :'peeps/index'
   end

@@ -4,17 +4,18 @@ require 'bcrypt'
 
 # Interacts with the DB.
 class User
-  attr_reader :id, :email
+  attr_reader :id, :name, :email
 
-  def initialize(id = nil, email = nil, **kwargs)
+  def initialize(id = nil, name = nil, email = nil, **kwargs)
     @id = id || kwargs[:id]
+    @name = name || kwargs[:name]
     @email = email || kwargs[:email]
   end
 
-  def self.create(email, password)
+  def self.create(name, email, password)
     hashed_pswd = BCrypt::Password.create(password)
-    id = DB[:users].insert(email: email, hashed_pswd: hashed_pswd)
-    User.new id, email
+    id = DB[:users].insert(name: name, email: email, hashed_pswd: hashed_pswd)
+    User.new id, name, email
   end
 
   def self.find(user_id)
