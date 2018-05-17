@@ -35,11 +35,16 @@ describe User, :aggregate_failures, :db do
   end
 
   describe '.authenticate' do
-    it 'user provides correct email and password' do
+    example 'user provides correct email and password' do
       user
       user_to_authenticate = User.authenticate 'test@example.com', 'pswd123'
       expect(user_to_authenticate.id).to eq user.id
       expect(user_to_authenticate.email).to eq 'test@example.com'
+    end
+
+    example 'user provides incorrect email' do
+      user
+      expect(User.authenticate('wrong_email@example.com', 'pswd123')).to be_nil
     end
   end
 

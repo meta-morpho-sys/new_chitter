@@ -28,6 +28,7 @@ class User
 
   def self.authenticate(email, password)
     result = DB[:users].where(email: email).first
+    return if result.nil?
     return unless BCrypt::Password.new(result[:hashed_pswd]) == password
     User.new result
   end
