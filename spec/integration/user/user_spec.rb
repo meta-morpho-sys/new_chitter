@@ -43,12 +43,10 @@ describe User, :aggregate_failures, :db do
     end
 
     example 'user provides incorrect email' do
-      user
       expect(User.authenticate('wrong_email@example.com', 'pswd123')).to be_nil
     end
 
     example 'user provides incorrect password' do
-      user
       expect(User.authenticate('test@example.com', 'wrong_pswd')).to be_nil
     end
   end
