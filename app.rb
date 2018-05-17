@@ -39,6 +39,21 @@ class Chitter < Sinatra::Base
   end
   # </editor-fold>
 
+  get '/login' do
+    erb :'login/new'
+  end
+
+  post '/login' do
+    user = User.authenticate(params[:email], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect "user/#{user.id}/peeps"
+    else
+      flash[:notice] = FlashMsgs::WRONG_ACCESS_CREDENTIALS
+      redirect '/login'
+    end
+  end
+
   get '/user/:id/peeps' do
     @user = User.find params[:id]
     erb :'peeps/index'
