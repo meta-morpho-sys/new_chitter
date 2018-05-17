@@ -4,6 +4,7 @@ require 'bcrypt'
 
 # Interacts with the DB.
 class User
+  include BCrypt
   attr_reader :id, :name, :email
 
   def initialize(id = nil, name = nil, email = nil, **kwargs)
@@ -20,9 +21,15 @@ class User
 
   def self.find(user_id)
     return nil unless user_id
-    u = DB[:users] .where(id: user_id).first
+    u = DB[:users].where(id: user_id).first
     raise 'User not found' if u.nil?
     User.new u
+  end
+
+  def self.authenticate(email, password)
+    result = DB[:users].where(email: email).first
+    return unless BCrypt::Password.new(result[:hashed_pswd]) == password
+    User.new result
   end
 
   def ==(other)
