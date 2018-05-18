@@ -3,11 +3,11 @@
 require_relative '../../../models/user'
 
 describe User, :aggregate_failures, :db do
-  let(:user) { User.create 'Bob', 'test@example.com', 'pswd123' }
+  let(:created_user) { User.create 'Bob', 'test@example.com', 'pswd123' }
 
   describe '.create' do
     it 'adds a new user ' do
-      expect(user.id).not_to be nil
+      expect(created_user.id).not_to be nil
     end
 
     it "hashes user's password" do
@@ -19,7 +19,7 @@ describe User, :aggregate_failures, :db do
 
   describe '.find' do
     example 'a specific user with given ID' do
-      expect(User.find(user.id)).to eq user
+      expect(User.find(created_user.id)).to eq created_user
     end
 
     context 'when the user lacks an id' do
@@ -36,9 +36,9 @@ describe User, :aggregate_failures, :db do
 
   describe '.authenticate' do
     example 'user provides correct email and password' do
-      user
+      created_user
       user_to_authenticate = User.authenticate 'test@example.com', 'pswd123'
-      expect(user_to_authenticate.id).to eq user.id
+      expect(user_to_authenticate.id).to eq created_user.id
       expect(user_to_authenticate.email).to eq 'test@example.com'
     end
 
@@ -62,14 +62,6 @@ describe User, :aggregate_failures, :db do
       user1 = User.new id: 1, name: 'Bob', email: 'test1@example.com'
       user2 = User.new id: 1, name: 'Bob', email: 'test2@example.com'
       expect(user1).not_to eq user2
-    end
-  end
-
-  describe '#exists?' do
-    it 'returns true if the user is not newly created' do
-      user
-      auth_user = User.authenticate 'test@example.com', 'pswd123'
-      expect(auth_user.exists?).to eq true
     end
   end
 end

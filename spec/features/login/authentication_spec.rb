@@ -12,7 +12,6 @@ feature 'A user can log in providing his credentials', :db do
     fill_in('password', with: 'password123')
     click_button 'Sign in'
 
-    expect(page).to have_content 'Welcome, Bob!'
-    # TODO: Welcome AGAIN Bob
+    expect(page).to have_content 'Welcome back, Bob!'
   end
 end

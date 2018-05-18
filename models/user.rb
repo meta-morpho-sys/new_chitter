@@ -36,10 +36,5 @@ class User
   def ==(other)
     @id == other.id && @email == other.email
   end
-
-  def exists?
-    matching_users = DB[:users].where(email: @email)
-    !matching_users.empty?
-  end
 end
 
