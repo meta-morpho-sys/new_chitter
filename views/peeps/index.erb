@@ -9,8 +9,12 @@
   <title>Peeps</title>
 </head>
 <body>
-    <% if @user %>
+    <% if @user.exists? %>
+      Welcome back, <%= @user.name %>!
+    <% else %>
       Welcome, <%= @user.name %>!
     <% end %>
+<!--<h3>No Peeps for now</h3>-->
+
   </body>
 </html>

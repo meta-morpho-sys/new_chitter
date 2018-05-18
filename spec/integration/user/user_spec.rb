@@ -53,15 +53,23 @@ describe User, :aggregate_failures, :db do
 
   describe '#==' do
     example 'two users are equal if their ids and emails match' do
-      user1 = User.new 1, 'Bob', 'test@example.com'
-      user2 = User.new 1, 'Bob', 'test@example.com'
+      user1 = User.new id: 1, name: 'Bob', email: 'test@example.com'
+      user2 = User.new id: 1, name: 'Bob', email: 'test@example.com'
       expect(user1).to eq user2
     end
 
     example 'two users are not equal if their values are different' do
-      user1 = User.new 1, 'Bob', 'test1@example.com'
-      user2 = User.new 1, 'Bob', 'test2@example.com'
+      user1 = User.new id: 1, name: 'Bob', email: 'test1@example.com'
+      user2 = User.new id: 1, name: 'Bob', email: 'test2@example.com'
       expect(user1).not_to eq user2
+    end
+  end
+
+  describe '#exists?' do
+    it 'returns true if the user is not newly created' do
+      user
+      auth_user = User.authenticate 'test@example.com', 'pswd123'
+      expect(auth_user.exists?).to eq true
     end
   end
 end
