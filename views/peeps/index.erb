@@ -4,11 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/chitter.css">
-  <link rel="icon" type="image/png" href=/favicon-32x32.png">
-  <link rel="shortcut icon" type="image/png" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="/favicon_rocky.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon_rocky.png">
+  <link rel="apple-touch-icon image_src" href="/favicon_rocky.png">
   <title>Peeps</title>
 </head>
 <body>
+
+<form action="/login/sign_out" method="post">
+  <input name="button" type="submit" title="button" value="Sign out">
+</form>
 <%=	 flash[:notice] %>
 <h3>No Peeps for now</h3>
 
