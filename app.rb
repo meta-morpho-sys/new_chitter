@@ -14,37 +14,38 @@ class Chitter < Sinatra::Base
 
   # <editor-fold desc="HOME">
   get '/' do
-    redirect 'login/home'
+    redirect '/home'
   end
 
-  get '/login/home' do
+  get '/home' do
     erb :home
   end
   # </editor-fold>
 
-  # <editor-fold desc="USER">
-  get '/login/users/new/' do
-    erb :'users/new'
+  # <editor-fold desc="SIGN UP">
+  get '/login/sign_up' do
+    erb :'login/sign_up'
   end
 
-  post '/login/users' do
+  post '/users' do
     begin
       user = User.create(params[:name], params[:email], params[:password])
       session[:user_id] = user.id
       flash[:notice] = "Welcome, #{user.name}!"
     rescue Sequel::UniqueConstraintViolation
       flash[:error] = FlashMsgs::DUPLICATE_EMAIL
-      redirect '/login/users/new/'
+      redirect '/login/sign_up'
     end
     redirect "user/#{user.id}/peeps"
   end
   # </editor-fold>
 
-  get '/login' do
-    erb :'login/new'
+  # <editor-fold desc="SIGN IN">
+  get '/login/sign_in' do
+    erb :'/login/sign_in'
   end
 
-  post '/login' do
+  post '/login/sign_in' do
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
@@ -52,8 +53,15 @@ class Chitter < Sinatra::Base
       redirect "user/#{user.id}/peeps"
     else
       flash[:notice] = FlashMsgs::WRONG_ACCESS_CREDENTIALS
-      redirect '/login'
+      redirect '/login/sign_in'
     end
+  end
+  # </editor-fold>
+
+  post '/login/sign_out' do
+    session.clear
+    flash[:notice] = FlashMsgs::SIGN_OUT
+    redirect '/home'
   end
 
   get '/user/:id/peeps' do

@@ -6,7 +6,7 @@ feature 'A user can log in providing his credentials', :db do
     visit '/'
     click_link 'Sign in'
 
-    expect(current_path).to eq '/login'
+    expect(current_path).to eq '/login/sign_in'
 
     fill_in('email', with: 'test_1@example.com')
     fill_in('password', with: 'password123')
