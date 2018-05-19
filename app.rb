@@ -31,7 +31,7 @@ class Chitter < Sinatra::Base
     begin
       user = User.create(params[:name], params[:email], params[:password])
       session[:user_id] = user.id
-      flash[:notice] = "Welcome, #{user.name}!"
+      flash[:notice] = FlashMsgs::WELCOME.call(user.name)
     rescue Sequel::UniqueConstraintViolation
       flash[:error] = FlashMsgs::DUPLICATE_EMAIL
       redirect '/login/sign_up'
@@ -49,7 +49,7 @@ class Chitter < Sinatra::Base
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
-      flash[:notice] = "Welcome back, #{user.name}!"
+      flash[:notice] = FlashMsgs::WELCOME_BACK.call(user.name)
       redirect "user/#{user.id}/peeps"
     else
       flash[:notice] = FlashMsgs::WRONG_ACCESS_CREDENTIALS
@@ -58,11 +58,13 @@ class Chitter < Sinatra::Base
   end
   # </editor-fold>
 
+  # <editor-fold desc="SIGN OUT">
   post '/login/sign_out' do
     session.clear
     flash[:notice] = FlashMsgs::SIGN_OUT
     redirect '/home'
   end
+  # </editor-fold>
 
   get '/user/:id/peeps' do
     @user = User.find params[:id]
