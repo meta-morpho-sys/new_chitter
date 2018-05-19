@@ -7,7 +7,7 @@ feature 'Sign out', :db do
 
     click_button 'Sign out'
 
-    expect(current_path).to eq '/home'
+    expect(current_path).to eq '/login/home'
     expect(page).to have_content 'You successfully signed out!'
 
   end

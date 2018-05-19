@@ -12,12 +12,19 @@ class Chitter < Sinatra::Base
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(20) }
   register Sinatra::Flash
 
-  # <editor-fold desc="HOME">
-  get '/' do
-    redirect '/home'
+  before do
+    if request.path_info.split('/')[1] != 'login' && session[:user_id].nil?
+      redirect '/login/home'
+    end
+    @user = User.find(session[:user_id])
   end
 
-  get '/home' do
+  # <editor-fold desc="HOME">
+  get '/' do
+    redirect '/login/home'
+  end
+
+  get '/login/home' do
     erb :home
   end
   # </editor-fold>
@@ -27,7 +34,7 @@ class Chitter < Sinatra::Base
     erb :'login/sign_up'
   end
 
-  post '/users' do
+  post '/login/sign_up' do
     begin
       user = User.create(params[:name], params[:email], params[:password])
       session[:user_id] = user.id
