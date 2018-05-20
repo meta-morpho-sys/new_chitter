@@ -8,9 +8,7 @@ class Chitter < Sinatra::Base
   register Sinatra::Flash
 
   before do
-    if request.path_info.split('/')[1] != 'login' && session[:user_id].nil?
-      redirect '/login/home'
-    end
+    redirect '/login/home' if valid_user_session?
     current_user
   end
 
