@@ -3,7 +3,7 @@
 require 'sequel'
 require 'pry'
 require 'fileutils'
-require './app'
+require './app/app'
 
 task default: :help
 
@@ -17,7 +17,7 @@ namespace :db do
   task :create do
     Sequel.extension :migration
     puts 'Creating database structures.'
-    Sequel::Migrator.run(DB, 'db/migrations')
+    Sequel::Migrator.run(DB, 'app/db/migrations')
     puts 'Success!'
   end
 

@@ -5,7 +5,7 @@ ENV['RACK_ENV'] = 'test'
 Bundler.require(:default, ENV['RACK_ENV'].to_sym)
 
 # require our Sinatra app file
-require File.join(File.dirname(__FILE__), '..', 'app.rb')
+require File.join(File.dirname(__FILE__), '..', './app/app.rb')
 require_relative 'features/web_helpers'
 
 RSpec.configure do |config|

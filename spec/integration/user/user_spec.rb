@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../../models/user'
+require_relative '../../../app/models/user'
 
 describe User, :aggregate_failures, :db do
   let(:created_user) { User.create 'Bob', 'test@example.com', 'pswd123' }
