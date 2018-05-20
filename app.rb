@@ -74,7 +74,6 @@ class Chitter < Sinatra::Base
   # </editor-fold>
 
   get '/user/:id/peeps' do
-    @user = User.find params[:id]
     erb :'peeps/index'
   end
 
