@@ -5,9 +5,12 @@ require 'sinatra/flash'
 require './db/sequel_setup'
 require_relative './models/user'
 require_relative './lib/flash_msgs'
+require_relative 'helpers'
 
 # Controller
 class Chitter < Sinatra::Base
+  helpers Helpers
+  # include Helpers
   enable :sessions
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(20) }
   register Sinatra::Flash
@@ -16,7 +19,7 @@ class Chitter < Sinatra::Base
     if request.path_info.split('/')[1] != 'login' && session[:user_id].nil?
       redirect '/login/home'
     end
-    @user = User.find(session[:user_id])
+    current_user
   end
 
   # <editor-fold desc="HOME">

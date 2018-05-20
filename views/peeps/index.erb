@@ -15,7 +15,14 @@
   <input name="button" type="submit" title="button" value="Sign out">
 </form>
 <%=	 flash[:notice] %>
-<h3>No Peeps for now</h3>
+<h3>No Peeps for now for user <%= current_user.id %></h3>
+
+<% if current_user %>
+<h1>
+  <%= current_user.name %>
+
+</h1>
+  <%end  %>
 
   </body>
 </html>
