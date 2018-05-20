@@ -8,8 +8,7 @@ class Chitter < Sinatra::Base
   register Sinatra::Flash
 
   before do
-    # redirect '/login/home' if valid_user_session? && !logging_in?
-    redirect '/login/home' if invalid_user_session?
+    redirect '/login/home' if invalid_user_session? && !logging_in?
   end
 
   # <editor-fold desc="HOME">
