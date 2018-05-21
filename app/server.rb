@@ -5,6 +5,7 @@ class Chitter < Sinatra::Base
   helpers AppHelpers
   enable :sessions
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(20) }
+  set :public_folder, (proc { File.join(root, 'static') })
   register Sinatra::Flash
 
   before do
