@@ -16,7 +16,7 @@ body {
     background-image: url("favicon_rocky.png");
     background-repeat: no-repeat;
     position: relative;
-    -webkit-animation: rocmymove 5s;
+    -webkit-animation: rockymove 5s;
     -webkit-animation-direction: reverse;
     animation: rockymove 5s;
     animation-direction: reverse;
