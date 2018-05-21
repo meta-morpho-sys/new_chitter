@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
-feature 'A user can log in providing his credentials', :db do
-  before { sign_up }
+feature 'Signing in', :db do
   scenario 'when username and password are correct' do
-    visit '/'
-    click_link 'Sign in'
-
-    expect(current_path).to eq '/login/sign_in'
-
-    fill_in('email', with: 'test_1@example.com')
-    fill_in('password', with: 'password123')
-    click_button 'Sign in'
-
+    sign_up
+    sign_in
     expect(page).to have_content 'Welcome back, Bob!'
+  end
+
+  context 'the user receives a warning' do
+    scenario 'if tries to access without previously signing up' do
+      sign_in
+      expect(page).to have_content 'No such user.'
+    end
   end
 end

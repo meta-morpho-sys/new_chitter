@@ -9,6 +9,10 @@ class Chitter < Sinatra::Base
   end
 
   post '/login/sign_in' do
+    unless User.exists?(params[:email])
+      flash[:notice] = FlashMsgs::NO_SUCH_USER
+      redirect '/login/sign_in'
+    end
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id

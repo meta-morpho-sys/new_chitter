@@ -64,4 +64,10 @@ describe User, :aggregate_failures, :db do
       expect(user1).not_to eq user2
     end
   end
+
+  describe '.exists?' do
+    it 'returns false if the user has never been created' do
+      expect(User.exists?('non_existing@example.com')).to eq false
+    end
+  end
 end
