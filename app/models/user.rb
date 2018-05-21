@@ -15,7 +15,9 @@ class User
 
   def self.create(name, email, password)
     hashed_pswd = BCrypt::Password.create(password)
-    id = DB[:users].insert(name: name, email: email, hashed_pswd: hashed_pswd)
+    ds = DB[:users]
+    id = ds.call(:insert, { n: name, email: email, hashed_pswd: hashed_pswd },
+                 name: :$n, email: :$email, hashed_pswd: :$hashed_pswd)
     User.new id: id, name: name, email: email
   end
 
