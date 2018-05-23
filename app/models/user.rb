@@ -2,7 +2,7 @@
 
 require 'bcrypt'
 
-# Interacts with the DB.
+# Manages user object interactions with the DB.
 class User
   include BCrypt
   attr_reader :id, :name, :email
