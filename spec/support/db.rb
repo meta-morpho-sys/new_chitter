@@ -9,6 +9,7 @@ RSpec.configure do |c|
     puts 'Cleaning databases.'
     Rake::Task['db:create'].execute
     DB[:users].truncate
+    DB[:peeps].truncate
   end
   # The following will roll back the transactions
   # after each example has been run.
