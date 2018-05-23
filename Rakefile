@@ -12,10 +12,6 @@ task :help do
   sh 'rake -T'
 end
 
-def retrieve_target_arg
-  ARGV.size == 1 ? 0 : ARGV[1].to_i
-end
-
 namespace :db do
   Sequel.extension :migration
 
@@ -57,10 +53,17 @@ namespace :db do
 
   desc 'Perform rollback to specified target or full rollback as default'
   task :rollback do
-    ARGV.each { |a| task a.to_sym do; end }
+    arguments_helper
     Sequel::Migrator.run(DB, 'app/db/migrations', target: retrieve_target_arg)
+    puts 'Rolled back to:'
     Rake::Task['db:version'].execute
   end
 end
 
+def arguments_helper
+  ARGV.each { |a| task(a.to_sym {}) }
+end
 
+def retrieve_target_arg
+  ARGV.size == 1 ? 0 : ARGV[1].to_i
+end
