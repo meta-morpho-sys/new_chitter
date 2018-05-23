@@ -12,15 +12,31 @@ task :help do
   sh 'rake -T'
 end
 
+def retrieve_target_arg
+  ARGV.size == 1 ? 0 : ARGV[1].to_i
+end
+
 namespace :db do
-  desc 'Creates the development database structures.'
-  task :create do
-    Sequel.extension :migration
-    puts 'Creating database structures.'
-    Sequel::Migrator.run(DB, 'app/db/migrations')
-    puts 'Success!'
+  Sequel.extension :migration
+
+  desc 'Print current schema version'
+  task :version do
+    version = if DB.tables.include?(:schema_info)
+                DB[:schema_info].first[:version]
+              end || 0
+    puts "Schema version #{version}."
   end
 
+  desc 'Creates the development database structures.'
+  task :create do
+    puts 'Creating database structures.'
+    puts 'Migrating to the latest migration available.'
+    Sequel::Migrator.run(DB, 'app/db/migrations')
+    puts 'Success!'
+    Rake::Task['db:version'].execute
+  end
+
+  desc 'Deletes the DB files'
   task :teardown do
     puts "*** Deleting database files ***.\n\n"
     puts "    Press 'y' to confirm you want to delete the Chitter database.\n\n"
@@ -38,5 +54,13 @@ namespace :db do
       puts 'No such database file.'
     end
   end
+
+  desc 'Perform rollback to specified target or full rollback as default'
+  task :rollback do
+    ARGV.each { |a| task a.to_sym do; end }
+    Sequel::Migrator.run(DB, 'app/db/migrations', target: retrieve_target_arg)
+    Rake::Task['db:version'].execute
+  end
 end
+
 
