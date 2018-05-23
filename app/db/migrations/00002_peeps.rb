@@ -11,9 +11,8 @@ unless DB.table_exists? table_name
         primary_key :id
         foreign_key :user_id, :users, on_delete: :cascade
         String :text
-        DateTime :datetime
+        DateTime :created_at
       end
     end
   end
 end
-
