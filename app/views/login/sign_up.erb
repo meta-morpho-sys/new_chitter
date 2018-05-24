@@ -26,20 +26,20 @@
   <fieldset>
     <legend>Login Details</legend>
     <div>
-      <label for="name">Username:</label>
-      <input name="name" type="text" required autofocus>
+      <label for="name" class="title">Username:</label>
+      <input name="name" type="text" title="Username" required autofocus>
     </div>
     <div>
-      <label for="email">Email:</label>
-      <input name="email" type="email" required autofocus>
+      <label for="email" class="title">Email:</label>
+      <input name="email" type="email" title="email" required autofocus>
     </div>
 
     <div>
-      <label for="password">Password:</label>
+      <label for="password" class="title">Password:</label>
+      <input id="pswdInput" name="password" title="password" type="password" required>
       <input type="button" onclick="showPswd()" value="Show/Hide">
-      <input id="pswdInput" name="password" type="password" placeholder="6 digits, a combination of numbers and letters" required>
     </div>
-    <div>
+    <div class="submit">
       <input name="login" type="submit" value="Sign up">
     </div>
   </fieldset>

@@ -10,6 +10,7 @@ body {
 }
 
 .rocky {
+    border: none;
     margin: 20px;
     width: 250px;
     height: 300px;
@@ -35,3 +36,24 @@ body {
 nav {
     display: block;
 }
+
+nav, div, fieldset {
+    border-bottom: 1px solid #FFD324;
+    margin: 10px;
+    padding-bottom: 10px;
+    width: 400px;
+}
+
+.title {
+    float: left;
+    width: 100px;
+    text-align: left;
+    padding-right: 10px;
+}
+
+.submit {
+    text-align: right;
+    padding-right: 10px;
+    border: none;
+}
+
