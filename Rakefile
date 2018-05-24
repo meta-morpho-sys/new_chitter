@@ -29,7 +29,7 @@ namespace :db do
     puts 'Migrating to the latest migration available.'
     Sequel::Migrator.run(DB, 'app/db/migrations')
     puts 'Success!'
-    Rake::Task['db:version'].execute
+    show_db_version
   end
 
   desc 'Deletes the DB files'
@@ -51,19 +51,16 @@ namespace :db do
     end
   end
 
-  desc 'Perform rollback to specified target or full rollback as default'
-  task :rollback do
-    arguments_helper
-    Sequel::Migrator.run(DB, 'app/db/migrations', target: retrieve_target_arg)
-    puts 'Rolled back to:'
-    Rake::Task['db:version'].execute
+  desc 'Perform migration to specified target or 0 as default'
+  task :migrate do
+    target_arg = ARGV[1].to_i || 0
+    Sequel::Migrator.run(DB, 'app/db/migrations', target: target_arg)
+    puts 'Migrated to:'
+    show_db_version
+    exit # This is needed - it prevents args from being run as tasks
   end
 end
 
-def arguments_helper
-  ARGV.each { |a| task(a.to_sym {}) }
-end
-
-def retrieve_target_arg
-  ARGV.size == 1 ? 0 : ARGV[1].to_i
+def show_db_version
+  Rake::Task['db:version'].execute
 end
