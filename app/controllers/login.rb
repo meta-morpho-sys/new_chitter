@@ -2,7 +2,6 @@
 
 # Controllers for path to sign in and sign out
 class Chitter < Sinatra::Base
-
   # <editor-fold desc="SIGN IN">
   get '/login/sign_in' do
     erb :'/login/sign_in'

@@ -4,8 +4,8 @@ require 'timecop'
 require_relative '../../../app/models/peep'
 
 describe Peep, :aggregate_failures, :db do
-  let(:frozen_time){ Timecop.freeze(Time.now) }
-  let(:user) { User.create 'Bob Peep', 'peep_test@example.com', 'pswd123'}
+  let(:frozen_time) { Timecop.freeze(Time.now) }
+  let(:user) { User.create 'Bob Peep', 'peep_test@example.com', 'pswd123' }
   let(:new_peep) { Peep.create(user.id, 'This is a new peep') }
 
   context '.create' do
@@ -25,10 +25,10 @@ describe Peep, :aggregate_failures, :db do
   end
 
   describe '#==' do
-    example 'a peep is equal to another peep when same ID, text and timestamp' do
-      peep1 = Peep.new(id: 1, user_id: 2, text: 'New peep', created_at: frozen_time)
-      peep2 = Peep.new(id: 1, user_id: 2, text: 'New peep', created_at: frozen_time)
-      expect(peep1).to eq peep2
+    example 'two peeps are equal if same ID, text and timestamp' do
+      p1 = Peep.new(id: 1, user_id: 2, text: 'A peep', created_at: frozen_time)
+      p2 = Peep.new(id: 1, user_id: 2, text: 'A peep', created_at: frozen_time)
+      expect(p1).to eq p2
     end
   end
 end

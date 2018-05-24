@@ -42,4 +42,3 @@ class User
     !matching_users.empty?
   end
 end
-
