@@ -45,3 +45,4 @@ App:
 Testing:
 - [RSpec](https://github.com/rspec/rspec) - Behaviour Driven Development for Ruby.
 - [Capybara](https://github.com/teamcapybara/capybara/blob/3.0_stable/README.md) - Simulator of how a user interacts with the app.
+- [timecop](https://github.com/travisjeffery/timecop) - A gem for testing time-dependent code
