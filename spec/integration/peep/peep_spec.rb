@@ -22,6 +22,26 @@ describe Peep, :aggregate_failures, :db do
     it 'returns the time of creation' do
       expect(new_peep.timestamp).to eq frozen_time.asctime
     end
+
+    context 'when the peep lacks an id' do
+      it 'returns nil if no ID is given' do
+        expect(Peep.find(nil)).to eq nil
+      end
+
+      it 'warns when Peep ID is not found' do
+        non_existing_id = 2
+        expect { Peep.find(non_existing_id) }.to raise_error 'Peep not found'
+      end
+    end
+  end
+
+  context '.all' do
+    it 'returns all peeps' do
+      peep1 = Peep.create(user.id, 'This is peep 1')
+      peep2 = Peep.create(user.id, 'This is peep 2')
+      peep3 = Peep.create(user.id, 'This is peep 3')
+      expect(Peep.all).to include peep1, peep2, peep3
+    end
   end
 
   describe '#==' do

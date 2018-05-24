@@ -6,11 +6,11 @@ class Peep
 
   attr_reader :id, :user_id, :text, :timestamp
 
-  def initialize(id: nil, user_id: nil, text: nil, created_at: nil)
-    @id        = id
-    @user_id   = user_id
-    @text      = text
-    @timestamp = created_at.asctime
+  def initialize(id: nil, user_id: nil, text: nil, created_at: nil, **kwargs)
+    @id        = id || kwargs[:id]
+    @user_id   = user_id || kwargs[:user_id]
+    @text      = text || kwargs[:text]
+    @timestamp = created_at.asctime || kwargs[:created_at].asctime
   end
 
   def self.create(user_id, text)
@@ -20,8 +20,14 @@ class Peep
   end
 
   def self.find(peep_id)
+    return nil unless peep_id
     peep = PEEPS_DS.where(id: peep_id).first
-    Peep.new(peep)
+    raise 'Peep not found' if peep.nil?
+    Peep.new(**peep)
+  end
+
+  def self.all
+    PEEPS_DS.map { |r| Peep.new r }
   end
 
   def ==(other)
