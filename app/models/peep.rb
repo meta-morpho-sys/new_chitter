@@ -19,7 +19,6 @@ class Peep
 
   def self.find(peep_id)
     peep = DB[:peeps].where(id: peep_id).first
-    p "in find #{peep}"
     Peep.new(peep)
   end
 

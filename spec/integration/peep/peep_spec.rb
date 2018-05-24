@@ -26,7 +26,6 @@ describe Peep, :aggregate_failures, :db do
 
   describe '#==' do
     example 'a peep is equal to another peep when same ID, text and timestamp' do
-      p frozen_time
       peep1 = Peep.new(id: 1, user_id: 2, text: 'New peep', created_at: frozen_time)
       peep2 = Peep.new(id: 1, user_id: 2, text: 'New peep', created_at: frozen_time)
       expect(peep1).to eq peep2
