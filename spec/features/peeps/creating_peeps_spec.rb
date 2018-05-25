@@ -11,6 +11,6 @@ feature 'New peep', :db do
     click_button 'Peep'
 
     expect(page).to have_content 'New peep'
-    expect(page).to have_content 'New peep'
+    expect(page).to have_content "created on #{Time.now.asctime}"
   end
 end

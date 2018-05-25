@@ -3,7 +3,7 @@
 # Controller for Peeps path
 class Chitter < Sinatra::Base
   get '/user/:id/peeps' do
-    @peeps = Peep.find(1)
+    @peeps = Peep.all
     erb :'peeps/index'
   end
 
@@ -13,6 +13,6 @@ class Chitter < Sinatra::Base
 
   post '/peeps' do
     Peep.create(session[:user_id], params[:text])
-    redirect '/peeps/index'
+    redirect '/user/:id/peeps'
   end
 end
