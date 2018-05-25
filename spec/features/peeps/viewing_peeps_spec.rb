@@ -6,17 +6,9 @@ feature 'Viewing peeps', :db do
 
     expect(current_path).to eq '/user/1/peeps'
 
-    click_link 'New peep'
-    fill_in('text', with: 'Test peep')
-    click_button 'Peep'
-
-    click_link 'New peep'
-    fill_in('text', with: 'Test2 peep')
-    click_button 'Peep'
-
-    click_link 'New peep'
-    fill_in('text', with: 'Test3 peep')
-    click_button 'Peep'
+    create_peep 'Test peep'
+    create_peep 'Test2 peep'
+    create_peep 'Test3 peep'
 
     expect(page).to have_content 'Test peep'
     expect(page).to have_content 'Test2 peep'

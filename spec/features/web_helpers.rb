@@ -20,3 +20,9 @@ def sign_in
   fill_in('password', with: 'password123')
   click_button 'Sign in'
 end
+
+def create_peep(text)
+  click_link 'New peep'
+  fill_in('text', with: text)
+  click_button 'Peep'
+end
