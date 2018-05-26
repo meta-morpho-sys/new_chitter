@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/chitter.css">
+  <link rel="icon" type="image/png" href="/favicon_rocky.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon_rocky.png">
+  <link rel="apple-touch-icon image_src" href="/favicon_rocky.png">
+  <title>Peeps</title>
+</head>
+<body>
+
+<h2><%=	 flash[:notice] %></h2>
+
+<form action="/login/sign_out" method="post">
+  <input name="button" type="submit" title="button" value="Sign out">
+</form>
+
+<article>
+  <% @peeps.reverse.each do |peep|%>
+    <table>
+      <tr>
+        <td width="20px" rowspan="2" class="peep_rocky"></td>
+        <td>
+          <small>created on <%= peep.timestamp %> by @<a href=""><%= current_user.name %></a></small>
+        </td>
+      </tr>
+      <tr id="peep_text">
+        <td class="peep"><%= peep.text %></td>
+      </tr>
+    </table>
+  <% end %>
+</article>
+
+<div class="submit"><a href="/peeps/new">New peep</a></div>
+
+
+  </body>
+</html>
