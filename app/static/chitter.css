@@ -57,3 +57,18 @@ nav, div, fieldset {
     border: none;
 }
 
+table { margin: 10px }
+
+.peep {
+    border: 1px solid #FFD324;
+    border-radius: 20%;
+    padding: 20px;
+}
+
+.peep_rocky {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: url("favicon_rocky.png") no-repeat;
+    background-size: 50px;
+    border: none;
+}
