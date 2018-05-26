@@ -10,8 +10,7 @@ feature 'Viewing peeps', :db do
     create_peep 'Test2 peep'
     create_peep 'Test3 peep'
 
-    expect(page).to have_content 'Test peep'
-    expect(page).to have_content 'Test2 peep'
-    expect(page).to have_content 'Test3 peep'
+    expect('Test3 peep').to appear_before 'Test2 peep'
+    expect('Test2 peep').to appear_before 'Test peep'
   end
 end

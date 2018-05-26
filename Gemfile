@@ -7,6 +7,7 @@ ruby '2.4.1'
 group :test do
   gem 'capybara', require: 'capybara/rspec'
   gem 'coderay'
+  gem 'orderly'
   gem 'rspec'
   gem 'rspec-sinatra'
   gem 'selenium-webdriver'
