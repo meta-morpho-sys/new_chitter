@@ -36,11 +36,28 @@ describe Peep, :aggregate_failures, :db do
   end
 
   describe '.all' do
-    it 'returns all peeps sorted with most recent first' do
+    it 'returns all peeps if no user ID is provided' do
+      user1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
+      user2 = User.create 'Alice', 'alice@example.com', 'pswd123'
+      peep1 = Peep.create(user1.id, 'Pippo is great')
+      peep2 = Peep.create(user2.id, 'Alice is great')
+      expect(Peep.all).to eq [peep2, peep1]
+    end
+
+    it "returns user's peeps sorted with most recent first" do
       peep1 = Peep.create(user.id, 'This is peep 1')
       peep2 = Peep.create(user.id, 'This is peep 2')
       peep3 = Peep.create(user.id, 'This is peep 3')
-      expect(Peep.all).to eq [peep3, peep2, peep1]
+      expect(Peep.all(user.id)).to eq [peep3, peep2, peep1]
+    end
+
+    it 'returns peeps for specific user ID' do
+      user1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
+      user2 = User.create 'Alice', 'alice@example.com', 'pswd123'
+      peep1 = Peep.create(user1.id, 'Pippo is great')
+      peep2 = Peep.create(user2.id, 'Alice is great')
+      expect(Peep.all(user1.id)).to include peep1
+      expect(Peep.all(user.id)).not_to include peep2
     end
   end
 

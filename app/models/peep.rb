@@ -14,9 +14,9 @@ class Peep
   end
 
   def self.create(user_id, text)
-    id = PEEPS_DS.insert(user_id: user_id, text: text, created_at: Time.now)
-    res = PEEPS_DS.select(:created_at).first
-    Peep.new(id: id, user_id: user_id, text: text, created_at: res[:created_at])
+    now = Time.now
+    id = PEEPS_DS.insert(user_id: user_id, text: text, created_at: now)
+    Peep.new(id: id, user_id: user_id, text: text, created_at: now)
   end
 
   def self.find(peep_id)
@@ -26,8 +26,14 @@ class Peep
     Peep.new(**peep)
   end
 
-  def self.all
-    result = PEEPS_DS.order(Sequel.desc(:created_at)).all
+  def self.all(user_id = nil)
+    result = if user_id.nil?
+               PEEPS_DS.order(Sequel.desc(:created_at)).all
+             else
+               PEEPS_DS
+                 .where(user_id: user_id)
+                 .order(Sequel.desc(:created_at)).all
+             end
     result.map { |r| Peep.new r }
   end
 
