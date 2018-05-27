@@ -35,12 +35,12 @@ describe Peep, :aggregate_failures, :db do
     end
   end
 
-  context '.all' do
-    it 'returns all peeps' do
+  describe '.all' do
+    it 'returns all peeps sorted with most recent first' do
       peep1 = Peep.create(user.id, 'This is peep 1')
       peep2 = Peep.create(user.id, 'This is peep 2')
       peep3 = Peep.create(user.id, 'This is peep 3')
-      expect(Peep.all).to include peep1, peep2, peep3
+      expect(Peep.all).to eq [peep3, peep2, peep1]
     end
   end
 

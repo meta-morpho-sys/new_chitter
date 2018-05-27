@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-def sign_up
+def sign_up(name = 'Bob', email = 'test_1@example.com')
   visit '/'
   click_link 'Sign up'
 
-  fill_in('name', with: 'Bob')
-  fill_in('email', with: 'test_1@example.com')
+  fill_in('name', with: name)
+  fill_in('email', with: email)
   fill_in('password', with: 'password123')
   click_button 'Sign up'
 end

@@ -27,7 +27,8 @@ class Peep
   end
 
   def self.all
-    PEEPS_DS.map { |r| Peep.new r }
+    result = PEEPS_DS.order(Sequel.desc(:created_at)).all
+    result.map { |r| Peep.new r }
   end
 
   def ==(other)

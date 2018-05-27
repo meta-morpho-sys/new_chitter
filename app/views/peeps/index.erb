@@ -17,8 +17,10 @@
   <input name="button" type="submit" title="button" value="Sign out">
 </form>
 
+<div class="submit"><a href="/peeps/new">New peep</a></div>
+
 <article>
-  <% @peeps.reverse.each do |peep|%>
+  <% @peeps.each do |peep|%>
     <table>
       <tr>
         <td width="20px" rowspan="2" class="peep_rocky"></td>
@@ -32,9 +34,6 @@
     </table>
   <% end %>
 </article>
-
-<div class="submit"><a href="/peeps/new">New peep</a></div>
-
 
   </body>
 </html>
