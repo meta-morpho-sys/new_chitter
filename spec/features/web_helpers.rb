@@ -26,3 +26,9 @@ def create_peep(text)
   fill_in('text', with: text)
   click_button 'Peep'
 end
+
+def sign_up_and_peep(name, email, text)
+  sign_up name,  email
+  create_peep text
+end
+

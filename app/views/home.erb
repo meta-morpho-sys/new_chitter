@@ -18,6 +18,21 @@
   | <a href="/login/sign_up" title="sign up">Sign up</a> |
     <a href="/login/sign_in" title="sign in">Sign in</a> |
 </nav>
+<article>
+  <% @peeps.each do |peep|%>
+    <table>
+      <tr>
+        <td width="20px" rowspan="2" class="peep_rocky"></td>
+        <td>
+          <small>created on <%= peep.timestamp %> by @<a href=""><%= peep.user_id %></a></small>
+        </td>
+      </tr>
+      <tr id="peep_text">
+        <td class="peep"><%= peep.text %></td>
+      </tr>
+    </table>
+  <% end %>
+</article>
 
 <div class="rocky"></div>
 

@@ -18,6 +18,7 @@ class Chitter < Sinatra::Base
   end
 
   get '/login/home' do
+    @peeps = Peep.all
     erb :home
   end
   # </editor-fold>
