@@ -70,4 +70,12 @@ describe User, :aggregate_failures, :db do
       expect(User.exists?('non_existing@example.com')).to eq false
     end
   end
+
+  describe '#peeps' do
+    it 'fetches peeps created by a specific user' do
+      peep1 = Peep.create created_user.id, 'Test for peeps'
+      peep2 = Peep.create created_user.id, 'Test2 for peeps'
+      expect(created_user.peeps).to eq [peep2, peep1]
+    end
+  end
 end

@@ -33,12 +33,16 @@ class User
     User.new(**result)
   end
 
+  def self.exists?(email)
+    matching_users = DB[:users].where(email: email)
+    !matching_users.empty?
+  end
+
   def ==(other)
     @id == other.id && @email == other.email
   end
 
-  def self.exists?(email)
-    matching_users = DB[:users].where(email: email)
-    !matching_users.empty?
+  def peeps
+    Peep.all(id)
   end
 end

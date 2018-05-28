@@ -1,0 +1,25 @@
+@startuml
+
+class User {
+id
+name
+email
+password
+{static} create()
+{static} find()
+{static} authenticate()
+{static} exists?()
+peeps()
+}
+
+class Peep {
+id
+user_id
+text
+timestamp
+{static} create()
+{static} find()
+{static} all()
+}
+
+@enduml
