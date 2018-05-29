@@ -37,6 +37,10 @@ class Peep
     result.map { |r| Peep.new r }
   end
 
+  def user
+    User.find(user_id)
+  end
+
   def ==(other)
     @id == other.id && @text == other.text && @timestamp == other.timestamp
   end

@@ -20,12 +20,11 @@
 </nav>
 <article>
   <% @peeps.each do |peep|%>
-    <% name = User.find(peep.user_id).name %>
     <table>
       <tr>
         <td width="20px" rowspan="2" class="peep_rocky"></td>
         <td>
-          <small>created on <%= peep.timestamp %> by @<a href=""><%= name %></a></small>
+          <small>created on <%= peep.timestamp %> by @<a href=""><%= peep.user.name %></a></small>
         </td>
       </tr>
       <tr id="peep_text">
