@@ -9,8 +9,8 @@ feature 'Viewing peeps', :db, :aggregated_failures do
     click_button 'Sign out'
 
     visit '/'
-    expect(page).to have_content "Alice's peep", '@Alice'
-    expect(page).to have_content "Eric's peep", '@Eric'
+    expect(page).to have_content "Alice's peep", 'Alice'
+    expect(page).to have_content "Eric's peep", 'Eric'
   end
 
   scenario 'peeps are displayed in a most recent first order' do
