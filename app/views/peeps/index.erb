@@ -13,6 +13,8 @@
 
 <h2><%=	 flash[:notice] %></h2>
 
+<h2>Welcome, <%= current_user.name %></h2>
+
 <form action="/login/sign_out" method="post">
   <input name="button" type="submit" title="button" value="Sign out">
 </form>
@@ -25,7 +27,7 @@
       <tr>
         <td width="20px" rowspan="2" class="peep_rocky"></td>
         <td>
-          <small>created on <%= peep.timestamp %> by @<a href=""><%= peep.user_id %></a></small>
+          <small>created on <%= peep.timestamp %></small>
         </td>
       </tr>
       <tr id="peep_text">
@@ -34,6 +36,8 @@
     </table>
   <% end %>
 </article>
+
+<div class="rocky"></div>
 
   </body>
 </html>

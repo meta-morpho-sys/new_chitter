@@ -11,34 +11,77 @@ body {
 
 .rocky {
     border: none;
-    margin: 20px;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    -webkit-animation: xAxis 2.5s 3 cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation: xAxis 2.5s 3 cubic-bezier(0.02, 0.01, 0.21, 1);
+}
+
+.rocky::after {
+    content: '';
+    display: block;
     width: 250px;
     height: 300px;
-    background-image: url("favicon_rocky.png");
-    background-repeat: no-repeat;
-    position: relative;
-    -webkit-animation: rockymove 5s;
-    -webkit-animation-direction: reverse;
-    animation: rockymove 5s;
-    animation-direction: reverse;
+    border: none;
+    position: absolute;
+    right: 100px;
+    bottom: 100px;
+    background: url("favicon_rocky.png") no-repeat;
+    -webkit-animation: yAxis 2.5s 3 cubic-bezier(0.3, 0.27, 0.07, 1.64);
+    animation: yAxis 2.5s 3 cubic-bezier(0.3, 0.27, 0.07, 1.64);
 }
 
-@-webkit-keyframes rockymove {
-    0%   {right: -1000px; top: -0px;}
-    100% {right: 50px; top: 200px;}
+@-webkit-keyframes yAxis {
+    50% {
+        -webkit-animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+        animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+        -webkit-transform: translateY(-100px);
+        transform: translateY(-100px);
+    }
 }
 
-@keyframes rockymove {
-    0%   {right: -1000px; top: -0px;}
-    100% {right: 50px; top: 200px;}
+@keyframes yAxis {
+    50% {
+        -webkit-animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+        animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+        -webkit-transform: translateY(-100px);
+        transform: translateY(-100px);
+    }
+}
+
+@-webkit-keyframes xAxis {
+    50% {
+        -webkit-animation-timing-function: cubic-bezier(0.42,0,0.58,1);
+        animation-timing-function: cubic-bezier(0.42,0,0.58,1);
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+    }
+}
+
+@keyframes xAxis {
+    50% {
+        -webkit-animation-timing-function: cubic-bezier(0.42,0,0.58,1);
+        animation-timing-function: cubic-bezier(0.42,0,0.58,1);
+        -webkit-transform: translateX(100px);
+        transform: translateX(100px);
+    }
 }
 
 nav {
     display: block;
+    margin-bottom: 50px;
+    padding: 5px;
+    border-top: 2px solid #FFD324;
+    border-bottom: 2px solid #FFD324;
+    border-radius: 10%;
+    width: 110px;
 }
 
-nav, div, fieldset {
+
+div, fieldset, textarea {
     border-bottom: 1px solid #FFD324;
+    border-radius: 10%;
     margin: 10px;
     padding-bottom: 10px;
     width: 400px;
@@ -57,11 +100,12 @@ nav, div, fieldset {
     border: none;
 }
 
-table { margin: 10px }
+table { margin: 20px }
 
 .peep {
-    border: 1px solid #FFD324;
-    border-radius: 20%;
+    width: 350px;
+    border-top: 1px solid #FFD324;
+    border-radius: 10%;
     padding: 20px;
 }
 

@@ -15,26 +15,30 @@
 
 <h1>Chitter</h1>
 <nav>
-  | <a href="/login/sign_up" title="sign up">Sign up</a> |
-    <a href="/login/sign_in" title="sign in">Sign in</a> |
+  <a href="/login/sign_up" title="sign up">Sign up</a> |
+  <a href="/login/sign_in" title="sign in">Sign in</a>
 </nav>
+
+<div class="rocky"></div>
+
 <article>
   <% @peeps.each do |peep|%>
     <table>
       <tr>
         <td width="20px" rowspan="2" class="peep_rocky"></td>
-        <td>
-          <small>created on <%= peep.timestamp %> by @<a href=""><%= peep.user.name %></a></small>
+        <td id="peep-<%= peep.id %>">
+          <small>
+            created by <b><%= peep.user.name %></b> on <%= peep.timestamp %>
+
+          </small>
         </td>
       </tr>
-      <tr id="peep_text">
+      <tr>
         <td class="peep"><%= peep.text %></td>
       </tr>
     </table>
   <% end %>
 </article>
-
-<div class="rocky"></div>
 
 </body>
 </html>
