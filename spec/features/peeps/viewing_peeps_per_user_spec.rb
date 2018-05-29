@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
-feature 'Viewing peeps', :db do
+feature 'Viewing peeps', :db, :aggregated_failures do
   scenario 'a user can see their peeps sorted with most recent first' do
     sign_up
 
     expect(current_path).to eq '/user/1/peeps'
 
     create_peep 'Test peep'
+    Timecop.travel(Time.now + 10)
     create_peep 'Test2 peep'
+    Timecop.travel(Time.now + 10)
     create_peep 'Test3 peep'
 
     expect('Test3 peep').to appear_before 'Test2 peep'

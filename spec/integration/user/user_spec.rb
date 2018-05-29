@@ -74,6 +74,7 @@ describe User, :aggregate_failures, :db do
   describe '#peeps' do
     it 'fetches peeps created by a specific user' do
       peep1 = Peep.create created_user.id, 'Test for peeps'
+      Timecop.travel(Time.now + 10)
       peep2 = Peep.create created_user.id, 'Test2 for peeps'
       expect(created_user.peeps).to eq [peep2, peep1]
     end

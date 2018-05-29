@@ -40,13 +40,16 @@ describe Peep, :aggregate_failures, :db do
       user1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
       user2 = User.create 'Alice', 'alice@example.com', 'pswd123'
       peep1 = Peep.create(user1.id, 'Pippo is great')
+      Timecop.travel(Time.now + 10)
       peep2 = Peep.create(user2.id, 'Alice is great')
       expect(Peep.all).to eq [peep2, peep1]
     end
 
     it "returns user's peeps sorted with most recent first" do
       peep1 = Peep.create(user.id, 'This is peep 1')
+      Timecop.travel(Time.now + 10)
       peep2 = Peep.create(user.id, 'This is peep 2')
+      Timecop.travel(Time.now + 10)
       peep3 = Peep.create(user.id, 'This is peep 3')
       expect(Peep.all(user.id)).to eq [peep3, peep2, peep1]
     end

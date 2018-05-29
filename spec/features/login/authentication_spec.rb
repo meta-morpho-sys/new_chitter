@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-feature 'Signing in', :db do
+feature 'Signing in', :aggregated_failures, :db do
   scenario 'when username and password are correct' do
     sign_up
     sign_in
