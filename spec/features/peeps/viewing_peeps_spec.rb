@@ -17,9 +17,11 @@ feature 'Viewing peeps', :db, :aggregated_failures do
     sign_up_and_peep 'Alice', 'alice@example.com', "Alice's peep"
     click_button 'Sign out'
     Timecop.travel(Time.now + 10)
+
     sign_up_and_peep 'Eric', 'eric@example.com', "Eric's peep"
     click_button 'Sign out'
     Timecop.travel(Time.now + 10)
+
     sign_up_and_peep 'Pippo', 'pippo@example.com', "Pippo's peep"
     click_button 'Sign out'
 
