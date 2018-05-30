@@ -3,6 +3,7 @@
 # Responsible for message strings displayed through Flash-Sinatra.
 class FlashMsgs
   DUPLICATE_EMAIL = 'This email already exists.'
+  LOGIN_REQUIRED = 'You must login first.'
   NO_SUCH_USER = 'No such user.'
   WELCOME = ->(name) { "Welcome, #{name}!" }
   WELCOME_BACK = ->(name) { "Welcome back, #{name}!" }

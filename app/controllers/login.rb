@@ -28,7 +28,7 @@ class Chitter < Sinatra::Base
   post '/login/sign_out' do
     session.clear
     flash[:notice] = FlashMsgs::SIGN_OUT
-    redirect '/home'
+    redirect '/login/home'
   end
   # </editor-fold>
 end

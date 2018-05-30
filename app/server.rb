@@ -9,7 +9,10 @@ class Chitter < Sinatra::Base
   register Sinatra::Flash
 
   before do
-    redirect '/login/home' if invalid_user_session? && !logging_in?
+    if invalid_user_session? && !logging_in?
+      flash[:error] = FlashMsgs::LOGIN_REQUIRED
+      redirect '/login/home'
+    end
   end
 
   # <editor-fold desc="HOME">
@@ -19,7 +22,7 @@ class Chitter < Sinatra::Base
 
   get '/login/home' do
     @peeps = Peep.all
-    erb :home
+    erb :'login/home'
   end
   # </editor-fold>
 
