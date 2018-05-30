@@ -35,17 +35,13 @@ body {
 @-webkit-keyframes yAxis {
     50% {
         -webkit-animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-        animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
         -webkit-transform: translateY(-100px);
-        transform: translateY(-100px);
     }
 }
 
 @keyframes yAxis {
     50% {
-        -webkit-animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
         animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-        -webkit-transform: translateY(-100px);
         transform: translateY(-100px);
     }
 }
@@ -53,17 +49,13 @@ body {
 @-webkit-keyframes xAxis {
     50% {
         -webkit-animation-timing-function: cubic-bezier(0.42,0,0.58,1);
-        animation-timing-function: cubic-bezier(0.42,0,0.58,1);
         -webkit-transform: translateX(100px);
-        transform: translateX(100px);
     }
 }
 
 @keyframes xAxis {
     50% {
-        -webkit-animation-timing-function: cubic-bezier(0.42,0,0.58,1);
         animation-timing-function: cubic-bezier(0.42,0,0.58,1);
-        -webkit-transform: translateX(100px);
         transform: translateX(100px);
     }
 }
