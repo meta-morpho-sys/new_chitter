@@ -34,4 +34,14 @@ feature 'Viewing peeps', :db, :aggregated_failures do
     expect(page).to have_content "Alice's peep"
     expect(page).not_to have_content "Eric's peep"
   end
+
+  scenario "a user can choose to see all peeps once he's signed in" do
+    sign_up_and_peep 'Eric', 'eric@example.com', "Eric's peep"
+    sign_up_and_peep 'Alice', 'alice@example.com', "Alice's peep"
+    sign_in 'eric@example.com'
+    click_link 'All peeps'
+
+    expect(page).to have_content 'Chitter'
+    expect(page).to have_content "Eric's peep", "Alice's peep"
+  end
 end
