@@ -6,8 +6,8 @@ feature 'New peep', :db do
     sign_up
     expect(current_path).to eq '/user/1/peeps'
 
-    create_peep 'New peep'
-    expect(page).to have_content 'New peep'
-    expect(page).to have_content "created on #{frozen_time.asctime}"
+    create_peep "Bob's peep"
+    expect(page).to have_content frozen_time.strftime(StrMsgs::TIME)
+    expect(page).to have_content "Bob's peep"
   end
 end

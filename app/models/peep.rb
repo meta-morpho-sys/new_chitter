@@ -10,7 +10,9 @@ class Peep
     @id        = id || kwargs[:id]
     @user_id   = user_id || kwargs[:user_id]
     @text      = text || kwargs[:text]
-    @timestamp = created_at.asctime || kwargs[:created_at].asctime
+    @timestamp = created_at.strftime(StrMsgs::TIME) ||
+                 kwargs[:created_at].strftime(StrMsgs::TIME)
+    # @timestamp = created_at.asctime || kwargs[:created_at].asctime
   end
 
   def self.create(user_id, text)
