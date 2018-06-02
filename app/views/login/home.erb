@@ -20,6 +20,13 @@
   <a href="/login/sign_in" title="sign in">Sign in</a>
 </nav>
 
+<div>
+  <% if current_user %>
+    <%= current_user.name %>
+    <a href="/user/<%=current_user.id%>/peeps">Back to my peeps</a>
+  <% end %>
+</div>
+
 <div class="rocky"></div>
 
 <article>
