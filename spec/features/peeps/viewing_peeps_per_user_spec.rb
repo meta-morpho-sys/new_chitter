@@ -35,13 +35,23 @@ feature 'Viewing peeps', :db, :aggregated_failures do
     expect(page).not_to have_content "Eric's peep"
   end
 
-  scenario "a user can choose to see all peeps once he's signed in" do
-    sign_up_and_peep 'Eric', 'eric@example.com', "Eric's peep"
-    sign_up_and_peep 'Alice', 'alice@example.com', "Alice's peep"
-    sign_in 'eric@example.com'
-    click_link 'All peeps'
+  feature "switching between homepage and user's peeps" do
+    before do
+      sign_up_and_peep 'Eric', 'eric@example.com', "Eric's peep"
+      sign_up_and_peep 'Alice', 'alice@example.com', "Alice's peep"
+      sign_in 'eric@example.com'
+      click_link 'All peeps'
+    end
 
-    expect(page).to have_content 'Chitter'
-    expect(page).to have_content "Eric's peep", "Alice's peep"
+    scenario "a user can choose to see all peeps once he's signed in" do
+      expect(page).to have_content 'Chitter'
+      expect(page).to have_content "Eric's peep", "Alice's peep"
+    end
+
+    scenario 'and go back to his own peeps' do
+      click_link 'Back to my peeps'
+      expect(page).to have_content "Eric's page"
+    end
+
   end
 end
