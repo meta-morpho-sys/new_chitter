@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class StrMsgs
-  TIME = '  ✎....   %e %b, %l:%M %P'
+  TIME_FORMAT = '%e %b,%l:%M %P'
 end
