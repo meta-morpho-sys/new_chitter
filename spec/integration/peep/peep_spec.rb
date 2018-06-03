@@ -20,7 +20,7 @@ describe Peep, :aggregate_failures, :db do
     end
 
     it 'returns the time of creation' do
-      expect(new_peep.timestamp).to eq frozen_time.strftime(StrMsgs::TIME)
+      expect(new_peep.timestamp).to eq frozen_time.strftime(StrMsgs::TIME_FORMAT)
     end
 
     context 'when the peep lacks an id' do
