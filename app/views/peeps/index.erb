@@ -22,19 +22,7 @@
 <div class="submit">| <a href="/peeps/new">New peep</a> | <a href="/">All peeps</a> |</div>
 
 <article>
-  <% @peeps.each do |peep|%>
-    <table>
-      <tr>
-        <td width="20px" rowspan="2" class="peep_rocky"></td>
-        <td>
-          <small>✎... <%= peep.timestamp %></small>
-        </td>
-      </tr>
-      <tr id="peep_text">
-        <td class="peep"><%= peep.text %></td>
-      </tr>
-    </table>
-  <% end %>
+  <%=	 erb :'peeps/peep' %>
 </article>
 
 <div class="rocky"></div>

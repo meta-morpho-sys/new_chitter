@@ -2,10 +2,13 @@
 
 # Manages Peep object interactions with the DB.
 class Peep
+  extend ERB::DefMethod
+
   PEEPS_DS = DB[:peeps]
 
   attr_reader :id, :user_id, :text, :timestamp
 
+  def_erb_method('html()', 'app/views/peeps/peep2.erb')
   def initialize(id: nil, user_id: nil, text: nil, created_at: nil, **kwargs)
     @id        = id || kwargs[:id]
     @user_id   = user_id || kwargs[:user_id]
