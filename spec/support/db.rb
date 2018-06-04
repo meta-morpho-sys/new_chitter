@@ -10,6 +10,7 @@ RSpec.configure do |c|
     Rake::Task['db:create'].execute
     DB[:users].truncate
     DB[:peeps].truncate
+    DB[:replies].truncate
   end
   # The following will roll back the transactions
   # after each example has been run.
