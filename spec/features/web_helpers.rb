@@ -10,13 +10,13 @@ def sign_up(name = 'Bob', email = 'test_1@example.com')
   click_button 'Sign up'
 end
 
-def sign_in(email = 'test_1@example.com', password = 'password123')
+def sign_in(email = 'test_1@example.com', password = 'password123' || user)
   visit '/'
   click_link 'Sign in'
 
   expect(current_path).to eq '/login/sign_in'
 
-  fill_in('email', with: email)
+  fill_in('email', with: email || user.email)
   fill_in('password', with: password)
   click_button 'Sign in'
 end
