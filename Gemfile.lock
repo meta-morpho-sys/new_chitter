@@ -23,6 +23,8 @@ GEM
     highline (1.7.10)
     hirb (0.7.3)
     json (2.1.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     method_source (0.9.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
@@ -109,6 +111,7 @@ DEPENDENCIES
   bcrypt
   capybara
   coderay
+  launchy
   orderly
   pry
   rake
