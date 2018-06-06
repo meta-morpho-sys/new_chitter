@@ -9,6 +9,7 @@ require_relative 'lib/str_msgs'
 require_relative 'helpers'
 require_relative 'models/user'
 require_relative 'models/peep'
+require_relative 'models/reply'
 
 require_relative './server'
 require_relative 'controllers/login'
