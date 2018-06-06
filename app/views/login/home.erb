@@ -31,17 +31,23 @@
 
 <article>
   <% @peeps.each do |peep|%>
-    <table>
+    <table class="peeps">
       <tr>
         <td width="20px" rowspan="2" class="peep_rocky"></td>
-        <td id="peep-<%= peep.id %>">
+        <td>
           <small>
             <b><%= peep.user.name %></b><%= peep.timestamp %>
           </small>
         </td>
       </tr>
-      <tr>
-        <td class="peep"><%= peep.text %></td>
+      <tr id="peep-<%= peep.id %>">
+        <td class="peep"><%= peep.text %>
+        </td>
+        <td><a class="reply" href="/peeps/<%= peep.id %>/reply" title="reply">Reply</a>
+        </td>
+        <% @replies.each do |reply|%>
+        <td class="reply"><%= reply.text%></td>
+        <% end %>
       </tr>
     </table>
   <% end %>

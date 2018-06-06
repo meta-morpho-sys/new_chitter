@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/chitter.css">
+  <link rel="icon" type="image/png" href="/favicon_rocky.png">
+  <link rel="shortcut icon" type="image/png" href="/favicon_rocky.png">
+  <link rel="apple-touch-icon image_src" href="/favicon_rocky.png">
+  <title>Create a reply</title>
+</head>
+
+<body>
+
+  <h3>Reply</h3>
+
+  <div class="rocky"></div>
+  <form action="/replies" method="post">
+    <input type="hidden" name="peep_id" value="<%= @peep.id %>">
+    <textarea name="text" rows="5" cols="50" placeholder="Text" autofocus></textarea>
+    <input type="submit" value="Reply">
+  </form>
+
+</body>
+</html>

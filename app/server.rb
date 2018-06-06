@@ -22,6 +22,7 @@ class Chitter < Sinatra::Base
 
   get '/login/home' do
     @peeps = Peep.all
+    @replies = Reply.all_reversed
     erb :'login/home'
   end
   # </editor-fold>
