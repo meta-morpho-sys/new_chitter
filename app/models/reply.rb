@@ -5,7 +5,7 @@ class Reply < Sequel::Model
   many_to_one :user
   many_to_one :peep
 
-  def self.all_reversed
-    Reply.reverse(:created_at).all
+  def self.all_reversed(peep_id)
+    Reply.where(peep_id: peep_id).reverse(:created_at).all
   end
 end
