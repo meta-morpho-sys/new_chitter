@@ -3,8 +3,10 @@
 require_relative '../../../app/models/reply'
 
 describe Reply, :aggregate_failures, :db do
-  let(:frozen_time) { Timecop.freeze(Time.now) }
-  let(:frozen_time2) { Timecop.freeze(Time.now + 10) }
+  let(:time0) { Time.now }
+  let(:time1) { time0 + 10 }
+  let(:time2) { time1 + 10 }
+
   let(:user) { User.create 'Bob', 'bob@example.com', 'pswd123' }
   let(:user2) { User.create 'Alice', 'alice@example.com', 'pswd123' }
   let(:peep) do
@@ -13,8 +15,8 @@ describe Reply, :aggregate_failures, :db do
   let(:reply) do
     Reply.create(peep_id: peep.id,
                  user_id: user2.id,
-                 text: 'Reply 1',
-                 created_at: frozen_time)
+                 text: 'Reply 0',
+                 created_at: time0)
   end
 
   describe '.create' do
@@ -28,12 +30,16 @@ describe Reply, :aggregate_failures, :db do
       reply1 = Reply.create(peep_id: peep.id,
                             user_id: user2.id,
                             text: 'Reply 1',
-                            created_at: frozen_time)
+                            created_at: time1)
       reply2 = Reply.create(peep_id: peep.id,
                             user_id: user2.id,
                             text: 'Reply 2',
-                            created_at: frozen_time2)
-      expect(Reply.all_reversed).to eq [reply2, reply1]
+                            created_at: time2)
+      expected = [reply2, reply1, reply]
+      actual = Reply.all_reversed
+      expect(actual).to eq expected
+      pp expected.map(&:text)
+      pp actual.map(&:text)
     end
   end
 end
