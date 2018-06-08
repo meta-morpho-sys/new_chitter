@@ -12,6 +12,7 @@ class Chitter < Sinatra::Base
   end
 
   post '/peeps' do
+    # TODO: handle the Not Null constraint exception
     Peep.create(user_id: current_user.id, text: params[:text], created_at: Time.now)
     redirect '/user/:id/peeps'
   end

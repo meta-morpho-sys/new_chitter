@@ -18,6 +18,7 @@ class Chitter < Sinatra::Base
     p_id = params[:peep_id]
     u_id = current_user.id
     text = params[:text]
+    # TODO: handle the Not Null constraint exception
     Reply.create(peep_id: p_id, user_id: u_id, text: text, created_at: Time.now)
     redirect '/'
   end
