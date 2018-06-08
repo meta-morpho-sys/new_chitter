@@ -9,8 +9,8 @@ Sequel.migration do
     create_table table_name do
       primary_key :id
       foreign_key :user_id, :users, on_delete: :cascade
-      String :text
-      DateTime :created_at
+      String :text, null: false
+      DateTime :created_at, null: false
     end
   end
 end
