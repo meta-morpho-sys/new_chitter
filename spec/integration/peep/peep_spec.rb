@@ -4,24 +4,25 @@ require 'timecop'
 require_relative '../../../app/models/peep'
 
 describe Peep, :aggregate_failures, :db do
-  let(:frozen_time) { Timecop.freeze(Time.now) }
+  let(:frz_time) { Timecop.freeze(Time.now) }
   let(:user) { User.create 'Bob Peep', 'peep_test@example.com', 'pswd123' }
-  let(:new_peep) { Peep.create(user_id: user.id, text: 'This is a new peep', created_at: frozen_time) }
+  let(:peep) { Peep.create(user_id: user.id, text: 'My new peep', created_at: frz_time) }
 
   context '.create' do
     it 'creates a new peep' do
-      expect(new_peep.id).not_to be nil
+      expect(peep.id).not_to be nil
     end
   end
 
   context '.find' do
     it 'finds peeps by id' do
-      expect(Peep.find(new_peep.id)).to eq new_peep
+      expect(Peep.find(peep.id)).to eq peep
     end
 
     it 'returns the time of creation' do
       # TODO: think about where to format the time ".strftime(StrMsgs::TIME_FORMAT)"
-      expect(new_peep.created_at).to eq frozen_time
+      expect(peep.created_at.strftime(StrMsgs::TIME_FORMAT))
+        .to eq frz_time.strftime(StrMsgs::TIME_FORMAT)
     end
 
     context 'when the peep lacks an id' do
