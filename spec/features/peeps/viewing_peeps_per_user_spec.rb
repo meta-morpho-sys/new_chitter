@@ -1,31 +1,31 @@
 # frozen_string_literal: true
 
 feature 'Viewing peeps', :db, :aggregated_failures do
-  scenario 'a user can see their peeps sorted with most recent first' do
-    sign_up
+  context 'in correct order and quantity' do
+    let(:user) { User.create('Anna', 'anna@anna', 'pswd123') }
+    let(:peep1) { Peep.create(user_id: user.id, text: 'Peep1', created_at: Time.now) }
+    let(:peep2) { Peep.create(user_id: user.id, text: 'Peep2', created_at: Time.now) }
+    background do
+      sign_up
+      expect(current_path).to eq '/user/2/peeps'
+    end
+    scenario 'a user can see their peeps sorted with most recent first' do
+      create_with peep1
+      Timecop.travel(Time.now + 30)
+      create_with peep2
 
-    expect(current_path).to eq '/user/1/peeps'
+      expect(peep2.text).to appear_before peep1.text
+    end
 
-    create_peep 'Test peep'
-    Timecop.travel(Time.now + 10)
-    create_peep 'Test2 peep'
-    Timecop.travel(Time.now + 10)
-    create_peep 'Test3 peep'
+    scenario 'a user can see exactly the number of peeps they have created' do
+      num_peeps = 100
+      num_peeps.times { |i| create_peep "Test#{i} peep" }
 
-    expect('Test3 peep').to appear_before 'Test2 peep'
-    expect('Test2 peep').to appear_before 'Test peep'
+      expect(page).to have_css('td.peep',
+                               text: /^Test[0-9]+ peep/, count: num_peeps)
+    end
   end
 
-  scenario 'a user can see exactly the number of peeps they have created' do
-    sign_up
-    expect(current_path).to eq '/user/1/peeps'
-
-    num_peeps = 100
-    num_peeps.times { |i| create_peep "Test#{i} peep" }
-
-    expect(page).to have_css('td.peep',
-                             text: /^Test[0-9]+ peep/, count: num_peeps)
-  end
 
   scenario 'the user can see only their peeps within their account' do
     sign_up_and_peep 'Eric', 'eric@example.com', "Eric's peep"
@@ -39,7 +39,7 @@ feature 'Viewing peeps', :db, :aggregated_failures do
     before do
       sign_up_and_peep 'Eric', 'eric@example.com', "Eric's peep"
       sign_up_and_peep 'Alice', 'alice@example.com', "Alice's peep"
-      sign_in 'eric@example.com'
+      sign_in email_str: 'eric@example.com'
       click_link 'All peeps'
     end
 
