@@ -6,7 +6,7 @@ class Chitter < Sinatra::Base
     begin
       @peep = Peep.with_pk!(params[:id])
     rescue Sequel::NoMatchingRow
-      flash[:notice] = StrMsgs::NO_PEEP_FOUND
+      flash[:notice] = FlashMsgs::NO_PEEP_FOUND
       redirect '/'
     end
     erb :'replies/new'
