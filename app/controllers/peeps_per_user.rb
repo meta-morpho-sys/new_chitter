@@ -3,7 +3,7 @@
 # Controller for Peeps path
 class Chitter < Sinatra::Base
   get '/user/:id/peeps' do
-    @peeps = Peep.all(current_user.id)
+    @peeps = Peep.all_per(current_user.id)
     erb :'peeps/index'
   end
 
@@ -12,7 +12,7 @@ class Chitter < Sinatra::Base
   end
 
   post '/peeps' do
-    Peep.create(current_user.id, params[:text])
+    Peep.create(user_id: current_user.id, text: params[:text])
     redirect '/user/:id/peeps'
   end
 end

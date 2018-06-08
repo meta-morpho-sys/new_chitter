@@ -1,51 +1,24 @@
 # frozen_string_literal: true
 
 # Manages Peep object interactions with the DB.
-class Peep
+class Peep < Sequel::Model
   extend ERB::DefMethod
-
   PEEPS_DS = DB[:peeps]
 
-  attr_reader :id, :user_id, :text, :timestamp
+  one_to_many :reply
 
-  def_erb_method('html()', 'app/views/peeps/peep2.erb')
-  def initialize(id: nil, user_id: nil, text: nil, created_at: nil, **kwargs)
-    @id        = id || kwargs[:id]
-    @user_id   = user_id || kwargs[:user_id]
-    @text      = text || kwargs[:text]
-    @timestamp = created_at.strftime(StrMsgs::TIME_FORMAT) ||
-                 kwargs[:created_at].strftime(StrMsgs::TIME_FORMAT)
-  end
-
-  def self.create(user_id, text)
-    now = Time.now
-    id = PEEPS_DS.insert(user_id: user_id, text: text, created_at: now)
-    Peep.new(id: id, user_id: user_id, text: text, created_at: now)
-  end
+   def_erb_method('html()', 'app/views/peeps/peep2.erb')
 
   def self.find(peep_id)
-    return nil unless peep_id
-    peep = PEEPS_DS.where(id: peep_id).first
-    raise 'Peep not found' if peep.nil?
-    Peep.new(**peep)
+    warn '[DEPRECATION] Stop using this method! WTF? I told you it is dead 🤬!!!'
+    with_pk!(peep_id)
   end
 
-  def self.all(user_id = nil)
-    result = if user_id.nil?
-               PEEPS_DS.order(Sequel.desc(:created_at)).all
-             else
-               PEEPS_DS
-                 .where(user_id: user_id)
-                 .order(Sequel.desc(:created_at)).all
-             end
-    result.map { |r| Peep.new r }
+  def self.all_per(user_id)
+    Peep.where(user_id: user_id).reverse(:created_at).all
   end
 
   def user
     User.find(user_id)
-  end
-
-  def ==(other)
-    @id == other.id && @text == other.text && @timestamp == other.timestamp
   end
 end
