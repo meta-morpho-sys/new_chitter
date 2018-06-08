@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-def sign_up(name = 'Bob', email = 'test_1@example.com', pswd = 'password123')
+def sign_up(name = 'Bob', email = 'test_1@example.com', pswd = 'pswd123')
   visit '/'
   click_link 'Sign up'
 
@@ -10,14 +10,14 @@ def sign_up(name = 'Bob', email = 'test_1@example.com', pswd = 'password123')
   click_button 'Sign up'
 end
 
-def sign_in(user)
+def sign_in(pswd = 'pswd123', user_obj: nil, email_str: nil)
   visit '/'
   click_link 'Sign in'
 
   expect(current_path).to eq '/login/sign_in'
 
-  fill_in('email', with: user.email)
-  fill_in('password', with: 'password123')
+  fill_in('email', with: email_str || user_obj.email)
+  fill_in('password', with: pswd)
   click_button 'Sign in'
 end
 

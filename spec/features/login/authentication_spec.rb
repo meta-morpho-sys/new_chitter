@@ -2,14 +2,14 @@
 
 feature 'Signing in', :aggregated_failures, :db do
   scenario 'when username and password are correct' do
-    sign_up
-    sign_in
-    expect(page).to have_content 'Welcome back, Bob!'
+    user = User.create('Anna', 'anna@anna', 'pswd123')
+    sign_in user_obj: user
+    expect(page).to have_content 'Welcome back, Anna!'
   end
 
   context 'the user receives a warning' do
     scenario 'if tries to access without previously signing up' do
-      sign_in
+      sign_in email: 'anna@anna'
       expect(page).to have_content 'No such user.'
     end
   end
