@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 # Manages Peep object interactions with the DB.
+# The table :peeps has the following columns:
+# [:id, :user_id, :text, :created_at]
+# PK = :id
+# FK = :user_id
 class Peep < Sequel::Model
   extend ERB::DefMethod
   PEEPS_DS = DB[:peeps]
