@@ -13,7 +13,7 @@
 <body>
 
   <h3>Reply</h3>
-
+  <%= flash[:notice] %>
   <div class="rocky"></div>
   <form action="/replies" method="post">
     <input type="hidden" name="peep_id" value="<%= @peep.id %>">
