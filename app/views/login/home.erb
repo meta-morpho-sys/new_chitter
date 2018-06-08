@@ -28,27 +28,33 @@
 </div>
 
 <div class="rocky"></div>
+
 <%= flash[:notice] %>
+
 <article>
   <% @peeps.each do |peep|%>
     <table class="peeps">
-      <tr>
+      <tr id="peep-<%= peep.id %>">
         <td width="20px" rowspan="2" class="peep_rocky"></td>
         <td>
           <small>
-            <b><%= peep.user.name %></b><%= peep.created_at %>
+            <b><%= peep.user.name %></b> ✎... <%= peep.created_at %>
           </small>
         </td>
-      </tr>
-      <tr id="peep-<%= peep.id %>">
-        <td class="peep"><%= peep.text %>
-        </td>
         <td><a class="reply" href="/peeps/<%= peep.id %>/reply" title="reply">Reply</a>
-        </td>
-        <%# TODO: Find a way to move the line below logic to the controller%>
+      </tr>
+      <tr id="peep_text">
+        <td class="peep"><%= peep.text %>
+          <%# TODO: Find a way to move the line below logic to the controller%>
         <% @replies = Reply.all_reversed(peep.id) %>
         <% @replies.each do |reply|%>
-        <td class="reply"><%= reply.text%></td>
+          <td>
+            <table>
+              <tr>
+                <td><%= reply.text%></td>
+              </tr>
+            </table>
+          </td>
         <% end %>
       </tr>
     </table>
