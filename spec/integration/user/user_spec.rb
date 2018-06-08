@@ -3,11 +3,11 @@
 require_relative '../../../app/models/user'
 
 describe User, :aggregate_failures, :db do
-  let(:created_user) { User.create 'Bob', 'test@example.com', 'pswd123' }
+  let(:user) { User.create 'Bob', 'test@example.com', 'pswd123' }
 
   describe '.create' do
     it 'adds a new user ' do
-      expect(created_user.id).not_to be nil
+      expect(user.id).not_to be nil
     end
 
     it "hashes user's password" do
@@ -19,7 +19,7 @@ describe User, :aggregate_failures, :db do
 
   describe '.find' do
     example 'a specific user with given ID' do
-      expect(User.find(created_user.id)).to eq created_user
+      expect(User.find(user.id)).to eq user
     end
 
     context 'when the user lacks an id' do
@@ -36,9 +36,9 @@ describe User, :aggregate_failures, :db do
 
   describe '.authenticate' do
     example 'user provides correct email and password' do
-      created_user
+      user
       user_to_authenticate = User.authenticate 'test@example.com', 'pswd123'
-      expect(user_to_authenticate.id).to eq created_user.id
+      expect(user_to_authenticate.id).to eq user.id
       expect(user_to_authenticate.email).to eq 'test@example.com'
     end
 
@@ -72,11 +72,12 @@ describe User, :aggregate_failures, :db do
   end
 
   describe '#peeps' do
+    t1 = Time.now
+    t2 = t1 + 10
     it 'fetches peeps created by a specific user' do
-      peep1 = Peep.create user_id: created_user.id, text: 'Test for peeps'
-      Timecop.travel(Time.now + 10)
-      peep2 = Peep.create user_id: created_user.id, text: 'Test2 for peeps'
-      expect(created_user.peeps).to eq [peep2, peep1]
+      p1 = Peep.create user_id: user.id, text: 'Test for peeps', created_at: t1
+      p2 = Peep.create user_id: user.id, text: 'Test2 for peeps', created_at: t2
+      expect(user.peeps).to eq [p2, p1]
     end
   end
 end
