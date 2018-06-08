@@ -25,13 +25,10 @@ describe Peep, :aggregate_failures, :db do
     end
 
     context 'when the peep lacks an id' do
-      it 'returns nil if no ID is given' do
-        expect(Peep.find(nil)).to eq nil
-      end
-
       it 'warns when Peep ID is not found' do
         non_existing_id = 2
-        expect { Peep.find(non_existing_id) }.to raise_error 'Peep not found'
+        expect { Peep.with_pk!(non_existing_id) }
+          .to raise_error Sequel::NoMatchingRow
       end
     end
   end
@@ -64,14 +61,6 @@ describe Peep, :aggregate_failures, :db do
       peep1 = Peep.create(user_id: user1.id, text: 'Pippo is great', created_at: t1)
       peep2 = Peep.create(user_id: user2.id, text: 'Alice is great', created_at: t2)
       expect(Peep.all).to eq [peep2, peep1]
-    end
-  end
-
-  xdescribe '#==' do
-    example 'two peeps are equal if same ID, text and timestamp' do
-      p1 = Peep.new(id: 1, user_id: 2, text: 'A peep', created_at: frozen_time)
-      p2 = Peep.new(id: 1, user_id: 2, text: 'A peep', created_at: frozen_time)
-      expect(p1).to eq p2
     end
   end
 end

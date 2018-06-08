@@ -14,7 +14,7 @@ class Peep < Sequel::Model
   def_erb_method('html()', 'app/views/peeps/peep2.erb')
 
   def self.find(peep_id)
-    warn '[DEPRECATION] Stop using this method! WTF? I told you it is dead 🤬!!!'
+    warn '[DEPRECATION]: This method will be deprecated soon!'
     with_pk!(peep_id)
   end
 
