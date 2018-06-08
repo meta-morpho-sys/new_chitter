@@ -43,29 +43,27 @@ describe Peep, :aggregate_failures, :db do
       peep1 = Peep.create(user_id: user1.id, text: 'Pippo is great')
       peep2 = Peep.create(user_id: user2.id, text: 'Alice is great')
       expect(Peep.all_per(user1.id)).to include peep1
-      expect(Peep.all_per(user.id)).not_to include peep2
+      expect(Peep.all_per(user1.id)).not_to include peep2
+    end
+
+    it "returns user's peeps sorted with most recent first" do
+      t1 = Time.now
+      t2 = t1 + 10
+      peep1 = Peep.create(user_id: user.id, text: 'Peep 1', created_at: t1)
+      peep2 = Peep.create(user_id: user.id, text: 'Peep 2', created_at: t2)
+      expect(Peep.all_per(user.id)).to eq [peep2, peep1]
     end
   end
 
   describe '.all' do
     it 'returns all peeps if no user ID is provided' do
+      t1 = Time.now
+      t2 = t1 + 10
       user1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
       user2 = User.create 'Alice', 'alice@example.com', 'pswd123'
-      peep1 = Peep.create(user_id: user1.id, text: 'Pippo is great')
-      Timecop.travel(Time.now + 10)
-      peep2 = Peep.create(user_id: user2.id, text: 'Alice is great')
+      peep1 = Peep.create(user_id: user1.id, text: 'Pippo is great', created_at: t1)
+      peep2 = Peep.create(user_id: user2.id, text: 'Alice is great', created_at: t2)
       expect(Peep.all).to eq [peep2, peep1]
-    end
-
-    it "returns user's peeps sorted with most recent first" do
-    t1 = Time.now
-    t2 = t1 + 10
-    peep1 = Peep.create(user_id: user.id, text: 'Peep 1', created_at: t1)
-    # Timecop.travel(Time.now + 10)
-    peep2 = Peep.create(user_id: user.id, text: 'Peep 2', created_at: t2)
-    # Timecop.travel(Time.now + 10)
-    # peep3 = Peep.create(user_id: user.id, text: 'Peep 3', created_at: now)
-    expect(Peep.all(user.id)).to eq [peep2, peep1]
     end
   end
 

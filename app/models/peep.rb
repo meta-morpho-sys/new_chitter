@@ -11,7 +11,7 @@ class Peep < Sequel::Model
 
   one_to_many :reply
 
-   def_erb_method('html()', 'app/views/peeps/peep2.erb')
+  def_erb_method('html()', 'app/views/peeps/peep2.erb')
 
   def self.find(peep_id)
     warn '[DEPRECATION] Stop using this method! WTF? I told you it is dead 🤬!!!'
@@ -20,6 +20,10 @@ class Peep < Sequel::Model
 
   def self.all_per(user_id)
     Peep.where(user_id: user_id).reverse(:created_at).all
+  end
+
+  def self.all
+    Peep.reverse(:created_at).all
   end
 
   def user
