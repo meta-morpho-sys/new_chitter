@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-def sign_up(name = 'Bob', email = 'test_1@example.com', pswd = 'pswd123')
+MY_PSWD = 'pswd123'
+
+def sign_up(name = 'Bob', email = 'test_1@example.com', pswd: MY_PSWD)
   visit '/'
   click_link 'Sign up'
 
@@ -10,7 +12,7 @@ def sign_up(name = 'Bob', email = 'test_1@example.com', pswd = 'pswd123')
   click_button 'Sign up'
 end
 
-def sign_in(pswd = 'pswd123', user_obj: nil, email_str: nil)
+def sign_in(pswd: MY_PSWD, user_obj: nil, email_str: nil)
   visit '/'
   click_link 'Sign in'
 
