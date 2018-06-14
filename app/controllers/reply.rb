@@ -23,9 +23,8 @@ class Chitter < Sinatra::Base
   private
 
   def reply_params
-    p_id = params[:peep_id]
+    p_id, text = params.values
     u_id = current_user.id
-    text = params[:text]
     [p_id, text, u_id]
   end
 end
