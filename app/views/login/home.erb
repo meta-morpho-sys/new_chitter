@@ -41,7 +41,7 @@
             <b><%= peep.user.name %></b> ✎... <%= peep.created_at %>
           </small>
         </td>
-        <td><a class="reply" href="/peeps/<%= peep.id %>/reply" title="reply">Reply</a>
+        <td><a href="/peeps/<%= peep.id %>/reply" title="reply">Reply</a>
       </tr>
       <tr id="peep_text">
         <td class="peep"><%= peep.text %>
@@ -51,7 +51,7 @@
           <td>
             <table>
               <tr>
-                <td><%= reply.text%></td>
+                <td class="reply"><%= reply.text%></td>
               </tr>
             </table>
           </td>

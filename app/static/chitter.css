@@ -94,7 +94,7 @@ div, fieldset, textarea {
 
 table { margin: 20px }
 
-.peep {
+.peep, .reply {
     width: 350px;
     border-top: 1px solid #FFD324;
     border-radius: 10%;
