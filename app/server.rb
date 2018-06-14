@@ -2,10 +2,14 @@
 
 # Server
 class Chitter < Sinatra::Base
+
   helpers AppHelpers
   enable :sessions
   set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(20) }
   set :public_folder, (proc { File.join(root, 'static') })
+  configure :development do
+    enable :logging
+  end
   register Sinatra::Flash
 
   before do
@@ -17,10 +21,12 @@ class Chitter < Sinatra::Base
 
   # <editor-fold desc="HOME">
   get '/' do
+    logger.info('SINATRA LOGGER')
     redirect '/login/home'
   end
 
   get '/login/home' do
+    logger.info('SINATRA LOGGER /login/home')
     @peeps = Peep.all
     erb :'login/home'
   end
