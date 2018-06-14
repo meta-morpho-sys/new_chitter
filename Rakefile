@@ -3,7 +3,7 @@
 require 'sequel'
 require 'pry'
 require 'fileutils'
-require './app/app'
+require_relative './app/db/sequel_setup'
 
 task default: :help
 
@@ -45,6 +45,7 @@ namespace :db do
     db_url = ENV['DATABASE_URL']
     begin
       FileUtils.remove(db_url)
+      raise 'Unable to remove db file' if File.exist?(db_url)
       puts "Sqlite3 database file #{db_url} deleted."
     rescue Errno::ENOENT
       puts 'No such database file.'
