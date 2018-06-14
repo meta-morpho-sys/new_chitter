@@ -14,12 +14,18 @@ class Chitter < Sinatra::Base
   end
 
   post '/replies' do
-    # TODO: Is there another way to assign these parameters? This looks ugly!
-    p_id = params[:peep_id]
-    u_id = current_user.id
-    text = params[:text]
+    p_id, text, u_id = reply_params
     # TODO: handle the Not Null constraint exception
     Reply.create(peep_id: p_id, user_id: u_id, text: text, created_at: Time.now)
     redirect '/'
+  end
+
+  private
+
+  def reply_params
+    p_id = params[:peep_id]
+    u_id = current_user.id
+    text = params[:text]
+    [p_id, text, u_id]
   end
 end
