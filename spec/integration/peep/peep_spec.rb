@@ -11,6 +11,10 @@ describe Peep, :aggregate_failures, :db do
   let(:u) { User.create 'Bob Peep', 'peep_test@example.com', 'pswd123' }
   let(:p) { Peep.create(user_id: u.id, text: 'New peep', created_at: frz_time) }
 
+  it { is_expected.to validate_presence :text }
+  it { is_expected.to validate_presence :created_at, message: 'is nil. Check your create/update method calls.' }
+
+
   context '.create' do
     it 'creates a new peep' do
       expect(p.id).not_to be nil
