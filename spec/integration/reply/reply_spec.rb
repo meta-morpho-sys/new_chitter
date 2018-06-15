@@ -13,28 +13,23 @@ describe Reply, :aggregate_failures, :db do
   let(:r) { Reply.create(peep_id: p.id, user_id: u2.id, text: 'Reply 0', created_at: t1) }
 
   it { is_expected.to validate_presence :text }
-  it { is_expected.to validate_presence :created_at }
+
+  message = 'is nil. Check your create/update method calls.'
+  it { is_expected.to validate_presence :created_at, message: message }
 
 
   describe '.create' do
     example 'a new reply' do
       expect(r.id).not_to be nil
     end
-
-    it "doesn't accept a nil time value" do
-      expect do
-        Reply.create(peep_id: p.id,
-                     user_id: u2.id,
-                     text: 'Reply 0',
-                     created_at: nil)
-      end.to raise_error Sequel::ValidationFailed
-    end
   end
 
   describe '.all_reversed' do
     it 'returns all replies sorted with most recent first' do
-      r1 = Reply.create(peep_id: p.id, user_id: u2.id, text: 'Reply 1', created_at: t1)
-      r2 = Reply.create(peep_id: p.id, user_id: u2.id, text: 'Reply 2', created_at: t2)
+      r1 = Reply.create(peep_id: p.id, user_id: u2.id,
+                        text: 'Reply 1', created_at: t1)
+      r2 = Reply.create(peep_id: p.id, user_id: u2.id,
+                        text: 'Reply 2', created_at: t2)
       expect(Reply.all_reversed(p.id)).to eq [r2, r1]
     end
 
@@ -42,9 +37,12 @@ describe Reply, :aggregate_failures, :db do
       p1 = Peep.create(user_id: u.id, text: 'Peep1', created_at: t0)
       p2 = Peep.create(user_id: u.id, text: 'Peep2', created_at: t1)
 
-      r0 = Reply.create(peep_id: p1.id, user_id: u2.id, text: 'Reply to Peep1', created_at: t0)
-      r1 = Reply.create(peep_id: p2.id, user_id: u2.id, text: 'Reply to Peep2', created_at: t1)
-      r2 = Reply.create(peep_id: p2.id, user_id: u.id, text: 'Reply2 to Peep2', created_at: t2)
+      r0 = Reply.create(peep_id: p1.id, user_id: u2.id,
+                        text: 'Reply to Peep1', created_at: t0)
+      r1 = Reply.create(peep_id: p2.id, user_id: u2.id,
+                        text: 'Reply to Peep2', created_at: t1)
+      r2 = Reply.create(peep_id: p2.id, user_id: u.id,
+                        text: 'Reply2 to Peep2', created_at: t2)
       # for p1
       expect(Reply.all_reversed(p1.id)).to include r0
       expect(Reply.all_reversed(p1.id)).not_to include r1
