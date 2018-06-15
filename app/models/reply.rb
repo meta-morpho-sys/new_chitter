@@ -9,6 +9,8 @@ class Reply < Sequel::Model
   def validate
     super
     validates_presence :text
+    validates_presence :created_at,
+                       message: 'is nil. Check your create/update method calls.'
   end
 
   def self.all_reversed(peep_id)

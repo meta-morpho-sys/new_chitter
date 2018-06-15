@@ -12,11 +12,22 @@ describe Reply, :aggregate_failures, :db do
   let(:p) { Peep.create(user_id: u.id, text: 'Peep', created_at: t0) }
   let(:r) { Reply.create(peep_id: p.id, user_id: u2.id, text: 'Reply 0', created_at: t1) }
 
-  it{ is_expected.to validate_presence :text }
+  it { is_expected.to validate_presence :text }
+  it { is_expected.to validate_presence :created_at }
+
 
   describe '.create' do
     example 'a new reply' do
       expect(r.id).not_to be nil
+    end
+
+    it "doesn't accept a nil time value" do
+      expect do
+        Reply.create(peep_id: p.id,
+                     user_id: u2.id,
+                     text: 'Reply 0',
+                     created_at: nil)
+      end.to raise_error Sequel::ValidationFailed
     end
   end
 
