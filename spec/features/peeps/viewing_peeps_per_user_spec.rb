@@ -7,7 +7,7 @@ feature 'Viewing peeps', :db, :aggregated_failures do
     let(:peep2) { Peep.create(user_id: user.id, text: 'Peep2', created_at: Time.now) }
     background do
       sign_up
-      expect(current_path).to eq '/user/2/peeps'
+      expect(current_path).to eq '/user/1/peeps'
     end
     scenario 'a user can see their peeps sorted with most recent first' do
       create_with peep1
