@@ -10,6 +10,7 @@ require_relative 'features/web_helpers'
 
 RSpec.configure do |config|
   config.order = :random
+  config.include RspecSequel::Matchers
   # Global require of 'support/db' when tests touch our DB.
   config.when_first_matching_example_defined(:db) do
     require_relative 'support/db'

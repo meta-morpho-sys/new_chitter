@@ -11,6 +11,7 @@ group :test do
   gem 'orderly'
   gem 'rspec'
   gem 'rspec-sinatra'
+  gem 'rspec_sequel_matchers'
   gem 'selenium-webdriver'
   gem 'simplecov'
   gem 'simplecov-console'
