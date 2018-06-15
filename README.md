@@ -15,8 +15,8 @@ The PostgreSQL database management system should be installed on your system.
  $ git clone https://github.com/meta-morpho-sys/new_chitter
  $ cd new_chitter
  $ bundle install
- $ rake create_databases
- $ rspec
+ $ rake db::create
+ $ bundle exec rspec
  ```
 
 This will give you the application, and set up two databases: `new_chitter` for the development environment, 
@@ -26,9 +26,9 @@ and `new_chitter_test` for the test environment.
  `$ rake help ` or `rake`
  
  
-##### To launch the app in the browser:
+##### To launch and interact with the app in the browser:
 
-From the command line `cd` into the app's directory and type the `rackup` command.
+Type the `rackup` command from the command line in the directory of the app.
 
 ##### App security
 Specify your session secret key as the environmental variable `SESSION_SECRET`.
@@ -36,13 +36,15 @@ If you don't specify this, the app will generate it's own 20 character SecureRan
 
 ### Technologies used
 App:
-- [Sinatra](https://github.com/sinatra/sinatra) - Quick tool for creating web applications.
-- [Sequel] - 
-- [PG](https://deveiate.org/code/pg/) - The Ruby PostgreSQL Driver.
 - [BCrypt](https://rubygems.org/gems/bcrypt/versions/3.1.11) - Security algorithm for hashing passwords.
-- [Rake](https://github.com/ruby/rake) - task management and build automation tool.
+- [Rake](https://github.com/ruby/rake) - Task management and build automation tool.
+- [Sequel](https://github.com/jeremyevans/sequel ) -  A simple, flexible, and powerful SQL database access toolkit for Ruby. 
+- [Sinatra](https://github.com/sinatra/sinatra) - Quick tool for creating web applications.
+- [sqlite3](https://rubygems.org/gems/sqlite3/versions/1.3.11) - A self-contained, embedded, full-featured, SQL database engine. 
 
 Testing:
-- [RSpec](https://github.com/rspec/rspec) - Behaviour Driven Development for Ruby.
 - [Capybara](https://github.com/teamcapybara/capybara/blob/3.0_stable/README.md) - Simulator of how a user interacts with the app.
+- [orderly](https://github.com/jmondo/orderly) - for asserting that some text (this) appears before other text (that) in rspec request specs
+- [rspec_sequel_matchers](rspec_sequel_matcher) - A set of matchers for testing of Sequel gem validations. 
+- [RSpec](https://github.com/rspec/rspec) - Behaviour Driven Development for Ruby.
 - [timecop](https://github.com/travisjeffery/timecop) - A gem for testing time-dependent code
