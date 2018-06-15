@@ -15,8 +15,12 @@ class Chitter < Sinatra::Base
 
   post '/replies' do
     p_id, text, u_id = reply_params
-    # TODO: handle the Not Null constraint exception
-    Reply.create(peep_id: p_id, user_id: u_id, text: text, created_at: Time.now)
+    begin
+      Reply.create(peep_id: p_id, user_id: u_id, text: text, created_at: Time.now)
+    rescue Sequel::ValidationFailed
+      flash[:error] = FlashMsgs::NO_TEXT_ENTERED
+      redirect "/peeps/#{p_id}/reply"
+    end
     redirect '/'
   end
 
