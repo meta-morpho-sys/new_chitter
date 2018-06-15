@@ -8,23 +8,23 @@ describe Peep, :aggregate_failures, :db do
   let(:t1) { t0 + 10 }
   let(:t2) { t1 + 10 }
   let(:frz_time) { Timecop.freeze(Time.now) }
-  let(:user) { User.create 'Bob Peep', 'peep_test@example.com', 'pswd123' }
-  let(:peep) { Peep.create(user_id: user.id, text: 'My new peep', created_at: frz_time) }
+  let(:u) { User.create 'Bob Peep', 'peep_test@example.com', 'pswd123' }
+  let(:p) { Peep.create(user_id: u.id, text: 'New peep', created_at: frz_time) }
 
   context '.create' do
     it 'creates a new peep' do
-      expect(peep.id).not_to be nil
+      expect(p.id).not_to be nil
     end
   end
 
   context '.find' do
     it 'finds peeps by id' do
-      expect(Peep.find(peep.id)).to eq peep
+      expect(Peep.find(p.id)).to eq p
     end
 
     it 'returns the time of creation' do
       # TODO: think about where to format the time ".strftime(StrMsgs::TIME_FORMAT)"
-      expect(peep.created_at.strftime(StrMsgs::TIME_FORMAT))
+      expect(p.created_at.strftime(StrMsgs::TIME_FORMAT))
         .to eq frz_time.strftime(StrMsgs::TIME_FORMAT)
     end
 
@@ -39,28 +39,28 @@ describe Peep, :aggregate_failures, :db do
 
   describe '.all_per' do
     it 'returns peeps for specific user ID' do
-      user1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
-      user2 = User.create 'Alice', 'alice@example.com', 'pswd123'
-      peep1 = Peep.create(user_id: user1.id, text: 'Pippo is great', created_at: t1)
-      peep2 = Peep.create(user_id: user2.id, text: 'Alice is great', created_at: t1)
-      expect(Peep.all_per(user1.id)).to include peep1
-      expect(Peep.all_per(user1.id)).not_to include peep2
+      u1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
+      u2 = User.create 'Alice', 'alice@example.com', 'pswd123'
+      p1 = Peep.create(user_id: u1.id, text: 'Pippo is great', created_at: t1)
+      p2 = Peep.create(user_id: u2.id, text: 'Alice is great', created_at: t1)
+      expect(Peep.all_per(u1.id)).to include p1
+      expect(Peep.all_per(u1.id)).not_to include p2
     end
 
     it "returns user's peeps sorted with most recent first" do
-      peep1 = Peep.create(user_id: user.id, text: 'Peep 1', created_at: t1)
-      peep2 = Peep.create(user_id: user.id, text: 'Peep 2', created_at: t2)
-      expect(Peep.all_per(user.id)).to eq [peep2, peep1]
+      p1 = Peep.create(user_id: u.id, text: 'Peep 1', created_at: t1)
+      p2 = Peep.create(user_id: u.id, text: 'Peep 2', created_at: t2)
+      expect(Peep.all_per(u.id)).to eq [p2, p1]
     end
   end
 
   describe '.all' do
     it 'returns all peeps if no user ID is provided' do
-      user1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
-      user2 = User.create 'Alice', 'alice@example.com', 'pswd123'
-      peep1 = Peep.create(user_id: user1.id, text: 'Pippo is great', created_at: t1)
-      peep2 = Peep.create(user_id: user2.id, text: 'Alice is great', created_at: t2)
-      expect(Peep.all).to eq [peep2, peep1]
+      u1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
+      u2 = User.create 'Alice', 'alice@example.com', 'pswd123'
+      p1 = Peep.create(user_id: u1.id, text: 'Pippo is great', created_at: t1)
+      p2 = Peep.create(user_id: u2.id, text: 'Alice is great', created_at: t2)
+      expect(Peep.all).to eq [p2, p1]
     end
   end
 end
