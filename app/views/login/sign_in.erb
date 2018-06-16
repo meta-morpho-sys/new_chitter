@@ -21,15 +21,7 @@
 <body>
 
 <form action="/login/sign_in" method="post">
-  <fieldset>
-    <legend>Login Details</legend>
-
-    <%= erb :'login/email_pswd_form'%>
-
-    <div class="submit">
-      <input name="login" type="submit" value="Sign in">
-    </div>
-  </fieldset>
+    <%= erb :'partials/sign_in_form'%>
 </form>
 
 <%= flash[:notice] %>

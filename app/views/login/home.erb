@@ -49,11 +49,7 @@
         <% @replies = Reply.all_reversed(peep.id) %>
         <% @replies.each do |reply|%>
           <td>
-            <table>
-              <tr>
-                <td class="reply"><%= reply.text%></td>
-              </tr>
-            </table>
+            <table><tr><td class="reply"><%= reply.text%></td></tr></table>
           </td>
         <% end %>
       </tr>

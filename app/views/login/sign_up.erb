@@ -23,19 +23,8 @@
 <body>
 
 <form action="/login/sign_up" method="post">
-  <fieldset>
-    <legend>Login Details</legend>
-    <div>
-      <label for="name" class="title">Username:</label>
-      <input name="name" type="text" title="Username" required autofocus>
-    </div>
+    <%= erb :'partials/sign_up_form'%>
 
-    <%= erb :'login/email_pswd_form'%>
-
-    <div class="submit">
-      <input name="login" type="submit" value="Sign up">
-    </div>
-  </fieldset>
 </form>
 
 <%= flash[:error] %>
