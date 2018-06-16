@@ -12,7 +12,7 @@ class Peep < Sequel::Model
 
   one_to_many :reply
 
-  def_erb_method('html()', 'app/views/partials/peep2.erb')
+  def_erb_method('erb()', 'app/views/partials/peep2.erb')
 
   def validate
     super
