@@ -51,4 +51,10 @@ describe Reply, :aggregate_failures, :db do
       expect(Reply.for_peep(p2.id)).not_to include r0
     end
   end
+
+  describe '#peep' do
+    it 'returns a peep' do
+      expect(r.peep).to eq p
+    end
+  end
 end
