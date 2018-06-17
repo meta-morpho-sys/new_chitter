@@ -67,4 +67,10 @@ describe Peep, :aggregate_failures, :db do
       expect(Peep.all).to eq [p2, p1]
     end
   end
+
+  describe '#user' do
+    it 'returns the user' do
+      expect(p.user).to eq u
+    end
+  end
 end
