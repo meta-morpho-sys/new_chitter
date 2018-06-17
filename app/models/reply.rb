@@ -13,7 +13,7 @@ class Reply < Sequel::Model
                        message: 'is nil. Check your create/update method calls.'
   end
 
-  def self.all_reversed(peep_id)
+  def self.for_peep(peep_id)
     Reply.where(peep_id: peep_id).reverse(:created_at).all
   end
 end

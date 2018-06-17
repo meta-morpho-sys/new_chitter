@@ -45,11 +45,13 @@
       </tr>
       <tr id="peep_text">
         <td class="peep"><%= peep.text %>
-          <%# TODO: Find a way to move the line below logic to the controller%>
-        <% @replies = Reply.all_reversed(peep.id) %>
-        <% @replies.each do |reply|%>
+        <% Reply.for_peep(peep.id).each do |reply| %>
           <td>
-            <table><tr><td class="reply"><%= reply.text%></td></tr></table>
+            <table>
+              <tr>
+                <td class="reply"><%= reply.text%></td>
+              </tr>
+            </table>
           </td>
         <% end %>
       </tr>
