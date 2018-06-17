@@ -41,20 +41,20 @@ describe Peep, :aggregate_failures, :db do
     end
   end
 
-  describe '.all_per' do
+  describe '.per_user' do
     it 'returns peeps for specific user ID' do
       u1 = User.create 'Pippo', 'Pippo@example.com', 'pswd123'
       u2 = User.create 'Alice', 'alice@example.com', 'pswd123'
       p1 = Peep.create(user_id: u1.id, text: 'Pippo is great', created_at: t1)
       p2 = Peep.create(user_id: u2.id, text: 'Alice is great', created_at: t1)
-      expect(Peep.all_per(u1.id)).to include p1
-      expect(Peep.all_per(u1.id)).not_to include p2
+      expect(Peep.per_user(u1.id)).to include p1
+      expect(Peep.per_user(u1.id)).not_to include p2
     end
 
     it "returns user's peeps sorted with most recent first" do
       p1 = Peep.create(user_id: u.id, text: 'Peep 1', created_at: t1)
       p2 = Peep.create(user_id: u.id, text: 'Peep 2', created_at: t2)
-      expect(Peep.all_per(u.id)).to eq [p2, p1]
+      expect(Peep.per_user(u.id)).to eq [p2, p1]
     end
   end
 

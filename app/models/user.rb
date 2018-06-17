@@ -43,6 +43,6 @@ class User
   end
 
   def peeps
-    Peep.all_per(id)
+    Peep.per_user(id)
   end
 end

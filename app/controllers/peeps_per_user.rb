@@ -3,7 +3,7 @@
 # Controller for Peeps path
 class Chitter < Sinatra::Base
   get '/user/:id/peeps' do
-    @peeps = Peep.all_per(current_user.id)
+    @peeps = Peep.per_user(current_user.id)
     erb :'peeps/index'
   end
 

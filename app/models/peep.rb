@@ -26,7 +26,7 @@ class Peep < Sequel::Model
     with_pk!(peep_id)
   end
 
-  def self.all_per(user_id)
+  def self.per_user(user_id)
     Peep.where(user_id: user_id).reverse(:created_at).all
   end
 
