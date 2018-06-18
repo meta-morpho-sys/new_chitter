@@ -16,7 +16,6 @@ feature 'Replies', :db do
     within "#peep-#{peep.id}" do
       click_link 'Reply'
     end
-
     expect(current_path).to eq "/peeps/#{peep.id}/reply"
   end
 

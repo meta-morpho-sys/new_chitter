@@ -19,7 +19,11 @@
 
 <div class="submit">| <a href="/peeps/new">New peep</a> | <a href="/">All peeps</a> |</div>
 
-<article><%= erb :'partials/peep_display' %></article>
+<article>
+  <% @peeps.each do |peep|%>
+    <%= erb :'partials/peep2', locals: peep %>
+  <% end %>
+</article>
 
 <div class="rocky"></div>
 

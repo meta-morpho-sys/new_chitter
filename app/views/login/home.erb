@@ -46,7 +46,7 @@
       </tr>
       <tr id="peep_text">
         <td class="peep"><%= peep.text %>
-          <%= erb :'partials/reply', locals: {object: peep} %>
+          <%= erb :'partials/reply', locals: {peep: peep} %>
       </tr>
     </table>
   <% end %>
