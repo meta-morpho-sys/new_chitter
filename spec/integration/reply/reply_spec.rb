@@ -30,7 +30,7 @@ describe Reply, :aggregate_failures, :db do
                         text: 'Reply 1', created_at: t1)
       r2 = Reply.create(peep_id: p.id, user_id: u2.id,
                         text: 'Reply 2', created_at: t2)
-      expect(Reply.for_peep(p.id)).to eq [r2, r1]
+      expect(Reply.for_peep(p)).to eq [r2, r1]
     end
 
     it 'returns all the replies for a specific peep' do
@@ -44,11 +44,11 @@ describe Reply, :aggregate_failures, :db do
       r2 = Reply.create(peep_id: p2.id, user_id: u.id,
                         text: 'Reply2 to Peep2', created_at: t2)
       # for p1
-      expect(Reply.for_peep(p1.id)).to include r0
-      expect(Reply.for_peep(p1.id)).not_to include r1
+      expect(Reply.for_peep(p1)).to include r0
+      expect(Reply.for_peep(p1)).not_to include r1
       # for peep2
-      expect(Reply.for_peep(p2.id)).to eq [r2, r1]
-      expect(Reply.for_peep(p2.id)).not_to include r0
+      expect(Reply.for_peep(p2)).to eq [r2, r1]
+      expect(Reply.for_peep(p2)).not_to include r0
     end
   end
 
