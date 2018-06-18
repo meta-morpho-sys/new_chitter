@@ -94,10 +94,17 @@ div, fieldset, textarea {
 
 table { margin: 20px }
 
-.peep, .reply {
-    width: 350px;
-    border-top: 1px solid #FFD324;
-    border-radius: 10%;
+.peep{
+     width: 350px;
+     border-top: 1px solid #FFD324;
+     border-radius: 10%;
+     padding: 20px;
+ }
+
+.reply {
+    width: 150px;
+    border: 1px solid #FFD324;
+    border-radius: 20%;
     padding: 20px;
 }
 
