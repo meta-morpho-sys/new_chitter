@@ -1,0 +1,9 @@
+<% Reply.for_peep(object.id).each do |reply| %>
+  <td>
+    <table>
+      <tr>
+        <td class="reply"><%= reply.text%></td>
+      </tr>
+    </table>
+  </td>
+<% end %>

@@ -45,15 +45,7 @@
       </tr>
       <tr id="peep_text">
         <td class="peep"><%= peep.text %>
-        <% Reply.for_peep(peep.id).each do |reply| %>
-          <td>
-            <table>
-              <tr>
-                <td class="reply"><%= reply.text%></td>
-              </tr>
-            </table>
-          </td>
-        <% end %>
+          <%= erb :'partials/reply', locals: {object: peep} %>
       </tr>
     </table>
   <% end %>
