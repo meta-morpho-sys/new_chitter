@@ -15,9 +15,7 @@
 
 <h4><%= current_user.name %>'s page</h4>
 
-<form action="/login/sign_out" method="post">
-  <input name="button" type="submit" title="button" value="Sign out">
-</form>
+<%= erb :'partials/sign_out' %>
 
 <div class="submit">| <a href="/peeps/new">New peep</a> | <a href="/">All peeps</a> |</div>
 

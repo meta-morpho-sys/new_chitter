@@ -23,7 +23,8 @@
 <div>
   <% if current_user %>
     <%= current_user.name %>
-    <a href="/user/<%=current_user.id%>/peeps">Back to my peeps</a>
+    <a href="/user/<%=current_user.id%>/peeps">Back to my peeps</a> or
+    <%= erb :'partials/sign_out' %>
   <% end %>
 </div>
 
