@@ -5,7 +5,7 @@ Chitter
 
 ### Prerequisites
 
-The PostgreSQL database management system should be installed on your system.
+The sqlite3 database engine should be installed on your system.
 
 ### Getting started:
 
