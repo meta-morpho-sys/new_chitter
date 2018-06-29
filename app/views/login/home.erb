@@ -39,10 +39,11 @@
         <td width="20px" rowspan="2" class="peep_rocky"></td>
         <td>
           <small>
-            <b><%= peep.user.name %></b> ✎... <%= peep.created_at %>
+            <b><%= peep.user.name %></b> ✎...<%= peep.created_at %>
           </small>
-        </td>
-        <td><a href="/peeps/<%= peep.id %>/reply" title="reply">Reply</a>
+          <small><a href="/peeps/<%= peep.id %>/reply" title="reply" style="
+          margin-left: 125px;
+          ">Reply</a></small></td>
       </tr>
       <tr id="peep_text">
         <td class="peep"><%= peep.text %>
