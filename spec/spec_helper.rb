@@ -9,6 +9,7 @@ require File.join(File.dirname(__FILE__), '..', './app/app.rb')
 require_relative 'features/web_helpers'
 
 RSpec.configure do |config|
+  config.profile_examples = 5
   config.order = :random
   config.include RspecSequel::Matchers
   # Global require of 'support/db' when tests touch our DB.
